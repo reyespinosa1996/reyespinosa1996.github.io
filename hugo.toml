@@ -1,3 +1,20 @@
 baseURL = 'https://example.org/'
 locale = 'en-us'
-title = 'My New Hugo Project'
+title = 'Reinaldo Espinosa'
+theme = 'ananke'
+
+[params]
+# site_logo = "img/logo.svg"
+description = 'Building reliable systems. Translating good tools. Serving people well'
+background_color_class = "bg-black"
+
+[menus]
+[[menus.main]]
+name = "About"
+url = "/about/"
+weight = 10
+
+[[menus.main]]
+name = "Posts"
+url = "/posts/"
+weight = 20
