@@ -14,11 +14,11 @@
 		
 			<atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
 			<item>
-				<title>My First Post</title>
-				<link>http://localhost:1313/posts/my-first-post/</link>
+				<title>Advantages of Hugo for Creating Personal Websites</title>
+				<link>http://localhost:1313/posts/hugo-for-personal-website/</link>
 				<pubDate>Thu, 17 Sep 2026 09:37:51 -0400</pubDate>
-				<guid>http://localhost:1313/posts/my-first-post/</guid>
-				<description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;This is &lt;strong&gt;bold&lt;/strong&gt; text, and this is &lt;em&gt;emphasized&lt;/em&gt; text.&lt;/p&gt;&#xA;&lt;p&gt;Visit the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; website!&lt;/p&gt;</description>
+				<guid>http://localhost:1313/posts/hugo-for-personal-website/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;Hugo turns the creation of a personal site into a process measured in seconds, not minutes.&lt;/strong&gt; While other tools force you to wait between builds, Hugo renders entire sites in fractions of a second, eliminating the friction between writing and publishing.&lt;/p&gt;&#xA;&lt;h2 id=&#34;performance-without-compromise&#34;&gt;Performance Without Compromise&lt;/h2&gt;&#xA;&lt;p&gt;Hugo is written in Go, a high-performance compiled language. The practical result: each piece of content renders in approximately &lt;strong&gt;1 millisecond&lt;/strong&gt;, and a moderately sized site builds instantly. A blog with hundreds or thousands of articles compiles in under a second — something unthinkable in generators based on Ruby or JavaScript.&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>
