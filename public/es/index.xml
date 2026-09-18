@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title> ReyEspinosa</title>
+		<link>http://localhost:1313/es/</link>
+		<description>Recent content on  ReyEspinosa</description>
+		<generator>Hugo</generator>
+		<language>es-es</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 17 Sep 2026 12:46:58 -0400</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/es/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>About</title>
+				<link>http://localhost:1313/es/about/</link>
+				<pubDate>Thu, 17 Sep 2026 12:46:58 -0400</pubDate>
+				<guid>http://localhost:1313/es/about/</guid>
+				<description>&lt;p&gt;Hola, soy Reinaldo — un Administrador de Sistemas que disfruta genuinamente hacer que la tecnología funcione de manera fluida, segura y confiable para las personas que dependen de ella.&lt;/p&gt;&#xA;&lt;p&gt;Durante los últimos años, he cuidado redes, servidores y sistemas en entornos de salud — lugares donde el tiempo de inactividad no es solo un inconveniente, sino que realmente importa. He reducido riesgos de seguridad, mejorado la disponibilidad de los sistemas y ayudado a mis colegas a crecer mediante el intercambio de conocimientos. Trabajo con Linux y Windows, Python, Docker, FreeBSD (pfSense), y valoro enfoques Ágiles como SCRUM. Pero más que las herramientas, valoro a las personas detrás de las pantallas.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>
