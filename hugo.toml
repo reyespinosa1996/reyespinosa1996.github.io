@@ -3,18 +3,41 @@ locale = 'en-us'
 title = 'ReyEspinosa'
 theme = 'ananke'
 
+defaultContentLanguage = "en"
+
+[languages]
+  [languages.en]
+    contentDir = "content/en"
+    label = "English"
+    locale = "en-US"
+    weight = 1
+  [languages.es]
+    contentDir = "content/es"
+    label = "Español"
+    locale = "es-ES"
+    weight = 2
+
+[languages.en.menus]
+  [[languages.en.menus.main]]
+    name = "Posts"
+    pageRef = "/posts"
+    weight = 10
+  [[languages.en.menus.main]]
+    name = "About"
+    pageRef = "/about"  # Hugo buscará content/en/about.md
+    weight = 20
+
+[languages.es.menus]
+  [[languages.es.menus.main]]
+    name = "Artículos"
+    pageRef = "/posts"
+    weight = 10
+  [[languages.es.menus.main]]
+    name = "Acerca de"
+    pageRef = "/about"  # Hugo buscará content/es/about.md
+    weight = 20
+
 [params]
 # site_logo = "img/logo.svg"
 description = 'Building reliable systems. Translating good tools. Serving people well'
 background_color_class = "bg-black"
-
-[menus]
-[[menus.main]]
-name = "About"
-url = "/about/"
-weight = 10
-
-[[menus.main]]
-name = "Posts"
-url = "/posts/"
-weight = 20
