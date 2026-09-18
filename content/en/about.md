@@ -3,6 +3,7 @@ date = '2026-09-17T12:46:58-04:00'
 draft = false
 title = 'About'
 type = 'page'
+translationKey =  "about"
 +++
 
 Hi, I'm Reinaldo — a System Administrator who genuinely enjoys making technology work smoothly, securely, and reliably for the people who depend on it.

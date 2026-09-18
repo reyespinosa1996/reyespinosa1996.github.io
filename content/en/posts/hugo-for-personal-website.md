@@ -2,6 +2,7 @@
 date = '2026-09-17T09:37:51-04:00'
 draft = false
 title = 'Advantages of Hugo for Creating Personal Websites'
+translationKey = "post-001"
 +++
 
 **Hugo turns the creation of a personal site into a process measured in seconds, not minutes.** While other tools force you to wait between builds, Hugo renders entire sites in fractions of a second, eliminating the friction between writing and publishing.

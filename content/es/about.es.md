@@ -1,8 +1,9 @@
 +++
 date = '2026-09-17T12:46:58-04:00'
 draft = false
-title = 'About'
+title = 'Sobre mi'
 type = 'page'
+translationKey =  "about"
 +++
 
 Hola, soy Reinaldo — un Administrador de Sistemas que disfruta genuinamente hacer que la tecnología funcione de manera fluida, segura y confiable para las personas que dependen de ella.

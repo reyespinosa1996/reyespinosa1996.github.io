@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>Posts on ReyEspinosa</title>
+		<title>Blog on ReyEspinosa</title>
 		<link>http://localhost:1313/posts/</link>
-		<description>Recent content in Posts on ReyEspinosa</description>
+		<description>Recent content in Blog on ReyEspinosa</description>
 		<generator>Hugo</generator>
-		<language>en-us</language>
+		<language>en-US</language>
 		
 		
 		

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Advantages of Hugo for Creating Personal Websites | ReyEspinosa</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Hugo turns the creation of a personal site into a process measured in seconds, not minutes. While other tools force you to wait between builds, Hugo renders entire sites in fractions of a second, eliminating the friction between writing and publishing.
+Performance Without Compromise
+Hugo is written in Go, a high-performance compiled language. The practical result: each piece of content renders in approximately 1 millisecond, and a moderately sized site builds instantly. A blog with hundreds or thousands of articles compiles in under a second — something unthinkable in generators based on Ruby or JavaScript.">
+    <meta name="generator" content="Hugo 0.165.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    <link rel="stylesheet" href="/ananke/css/main.css">
+    <script>
+  (function () {
+    "use strict";
+
+    
+    
+    function revealButtons() {
+      var buttons = document.querySelectorAll(".code-block .code-copy[hidden]");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].hidden = false;
+      }
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", revealButtons);
+    } else {
+      revealButtons();
+    }
+
+    function flash(button) {
+      var label = button.querySelector(".code-copy-label");
+      var previous = label ? label.textContent : null;
+      button.classList.add("is-copied");
+      if (label) label.textContent = "Copied";
+      window.setTimeout(function () {
+        button.classList.remove("is-copied");
+        if (label && previous !== null) label.textContent = previous;
+      }, 2000);
+    }
+
+    function legacyCopy(text) {
+      var area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "absolute";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      var ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } catch (e) {
+        ok = false;
+      }
+      document.body.removeChild(area);
+      return ok;
+    }
+
+    function copyFrom(button) {
+      var container = button.closest(".code-block");
+      if (!container) return;
+      var pre = container.querySelector("pre");
+      if (!pre) return;
+      var source = pre.querySelector("code") || pre;
+      var text = source.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(
+          function () { flash(button); },
+          function () { if (legacyCopy(text)) flash(button); }
+        );
+      } else if (legacyCopy(text)) {
+        flash(button);
+      }
+    }
+
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest(".code-copy");
+      if (button) copyFrom(button);
+    });
+  })();
+</script>
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/en/posts/hugo-for-personal-website/">
+    
+
+    
+    
+    <meta property="og:url" content="http://localhost:1313/en/posts/hugo-for-personal-website/">
+	<meta property="og:site_name" content="ReyEspinosa">
+	<meta property="og:title" content="Advantages of Hugo for Creating Personal Websites">
+	<meta property="og:description" content="Hugo turns the creation of a personal site into a process measured in seconds, not minutes. While other tools force you to wait between builds, Hugo renders entire sites in fractions of a second, eliminating the friction between writing and publishing.
+Performance Without Compromise Hugo is written in Go, a high-performance compiled language. The practical result: each piece of content renders in approximately 1 millisecond, and a moderately sized site builds instantly. A blog with hundreds or thousands of articles compiles in under a second — something unthinkable in generators based on Ruby or JavaScript.">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="en">
+		<meta property="article:published_time" content="2026-09-17T09:37:51-04:00">
+		<meta property="article:modified_time" content="2026-09-17T09:37:51-04:00">
+
+	<meta itemprop="name" content="Advantages of Hugo for Creating Personal Websites">
+	<meta itemprop="description" content="Hugo turns the creation of a personal site into a process measured in seconds, not minutes. While other tools force you to wait between builds, Hugo renders entire sites in fractions of a second, eliminating the friction between writing and publishing.
+Performance Without Compromise Hugo is written in Go, a high-performance compiled language. The practical result: each piece of content renders in approximately 1 millisecond, and a moderately sized site builds instantly. A blog with hundreds or thousands of articles compiles in under a second — something unthinkable in generators based on Ruby or JavaScript.">
+	<meta itemprop="datePublished" content="2026-09-17T09:37:51-04:00">
+	<meta itemprop="dateModified" content="2026-09-17T09:37:51-04:00">
+	<meta itemprop="wordCount" content="601">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Advantages of Hugo for Creating Personal Websites">
+	<meta name="twitter:description" content="Hugo turns the creation of a personal site into a process measured in seconds, not minutes. While other tools force you to wait between builds, Hugo renders entire sites in fractions of a second, eliminating the friction between writing and publishing.
+Performance Without Compromise Hugo is written in Go, a high-performance compiled language. The practical result: each piece of content renders in approximately 1 millisecond, and a moderately sized site builds instantly. A blog with hundreds or thousands of articles compiles in under a second — something unthinkable in generators based on Ruby or JavaScript.">
+
+	
+  </head><body class="ma0 avenir bg-near-white development is-page is-page page-hugo-for-personal-website">
+   
+  
+
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        ReyEspinosa
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/posts/" title="Posts page">
+              Posts
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+<main class="pb7" role="main">
+  
+
+  <article class="page-hugo-for-personal-website flex-l mw7 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100"><aside class="instapaper_ignoref b helvetica tracked ttu">
+    <a class="link dim" href="http://localhost:1313/en/posts/">Blog</a>
+  </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">Advantages of Hugo for Creating Personal Websites</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2026-09-17T09:37:51-04:00">September 17, 2026</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><p><strong>Hugo turns the creation of a personal site into a process measured in seconds, not minutes.</strong> While other tools force you to wait between builds, Hugo renders entire sites in fractions of a second, eliminating the friction between writing and publishing.</p>
+<h2 id="performance-without-compromise">Performance Without Compromise</h2>
+<p>Hugo is written in Go, a high-performance compiled language. The practical result: each piece of content renders in approximately <strong>1 millisecond</strong>, and a moderately sized site builds instantly. A blog with hundreds or thousands of articles compiles in under a second — something unthinkable in generators based on Ruby or JavaScript.</p>
+<p>This speed transforms the writing experience. Hugo&rsquo;s built-in development server reloads changes <strong>instantly</strong> as you write, with no perceptible waiting times. The feedback is immediate: you modify a paragraph, you see it right away.</p>
+<h2 id="portability-and-trivial-deployment">Portability and Trivial Deployment</h2>
+<p>A Hugo site is, in essence, <strong>a folder of static HTML, CSS, and JavaScript files</strong>. There is no database, no PHP runtime, no Node processes running in the background.</p>
+<p>This translates into concrete advantages:</p>
+<ul>
+<li><strong>Deploy anywhere</strong>: GitHub Pages, Netlify, Cloudflare Pages, a VPS with Nginx, or even cloud storage. All options are viable and free at their basic tiers.</li>
+<li><strong>Minimal maintenance cost</strong>: No server to patch, no database to back up, no plugin vulnerabilities to update.</li>
+<li><strong>Reduced attack surface</strong>: By serving only static files, there are no dynamic endpoints to exploit.</li>
+</ul>
+<h2 id="theme-ecosystem-and-customization">Theme Ecosystem and Customization</h2>
+<p>Hugo has <strong>more than 2,000 themes</strong> categorized by type: blogs, documentation, portfolios, résumés. Many of them offer features that would normally require custom development: dark/light mode, built-in search, tag archives, archive pages.</p>
+<p>For a personal site, this means you can have a professional web presence <strong>within minutes</strong> of choosing a theme. Further customization is equally accessible: configuration is centralized in one file, and templates use a clear, well-documented syntax.</p>
+<h2 id="a-content-centered-workflow">A Content-Centered Workflow</h2>
+<p>Hugo treats content as <strong>Markdown files with metadata</strong> in the front matter. Creating an entry comes down to one command:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <pre tabindex="0"><code>hugo new content posts/my-article.md</code></pre>
+  </div><p>This generates the file with the title and date already configured, ready to write in. The draft system (<code>draft = true</code>) lets you keep work in progress without it appearing on the published site until you&rsquo;re ready.</p>
+<p>Organization through <strong>taxonomies</strong> (tags, categories) is native, not an afterthought. This makes it easy to keep a blog with years of content navigable and coherent.</p>
+<h2 id="built-in-features-that-make-a-difference">Built-In Features That Make a Difference</h2>
+<ul>
+<li><strong>Asset pipeline</strong>: Image processing (resizing, cropping, format conversion), Sass compilation, and JavaScript bundling built in without external configuration.</li>
+<li><strong>Multilingual support</strong>: Manage sites in several languages from a single content base.</li>
+<li><strong>Shortcodes</strong>: Reusable snippets that insert complex content (videos, notices, tables from external data) without mixing HTML into the Markdown.</li>
+<li><strong>Modules</strong>: The ability to share and reuse configurations, themes, and content across projects through Git repositories.</li>
+</ul>
+<h2 id="realistic-considerations">Realistic Considerations</h2>
+<p>Hugo <strong>is not the right tool for everything</strong>. If you need dynamic server-side functionality (real-time comments, admin panels, user sessions), it will require external services or alternative solutions. There is a learning curve if you intend to create a theme from scratch, although using and customizing existing themes is accessible to anyone comfortable with the command line.</p>
+<p>For a <strong>personal site</strong>, however, these limitations are rarely an obstacle. Most personal blogs are intrinsically static: articles, pages, an RSS feed.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Hugo eliminates the tedious parts of publishing on the web — waiting times, server maintenance, fragile dependencies — and returns the focus to the only thing that matters on a personal site: <strong>the content</strong>. The compilation speed, the portability of the result, and the wealth of available themes configure a workflow where writing is the main act, not the technical configuration.</p>
+<ul class="pa0">
+  
+</ul><ul class="pa0">
+  
+</ul>
+
+      
+    </div></article>
+</main><footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  ReyEspinosa 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
