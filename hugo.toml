@@ -1,6 +1,6 @@
 baseURL = 'https://reyespinosa1996.github.io/reyespinosa-website/'
 locale = 'en-us'
-title = 'ReyEspinosa Website'
+title = 'Reinaldo Espinosa · Personal Site'
 theme = 'PaperMod'
 
 defaultContentLanguage = "en"
