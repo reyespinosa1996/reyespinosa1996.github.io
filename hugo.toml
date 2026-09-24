@@ -1,7 +1,7 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://reyespinosa1996.github.io/'
 locale = 'en-us'
-title = 'ReyEspinosa'
-theme = 'ananke'
+title = 'ReyEspinosa Website'
+theme = 'PaperMod'
 
 defaultContentLanguage = "en"
 
@@ -39,5 +39,3 @@ defaultContentLanguage = "en"
 
 [params]
 # site_logo = "img/logo.svg"
-description = 'Building reliable systems. Translating good tools. Serving people well'
-background_color_class = "bg-black"
