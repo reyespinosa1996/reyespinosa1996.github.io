@@ -1,1 +1,1 @@
-My personal website to post what I'm currently into
+My personal website to post what I'm currently into.
