@@ -1,0 +1,33 @@
+baseURL: https://reyespinosa1996.github.io
+locale: en-us
+title: Reinaldo Espinosa · Personal Site
+theme: PaperMod
+defaultContentLanguage: en
+languages:
+  en:
+    contentDir: content/en
+    label: English
+    locale: en-US
+    weight: 1
+    menus:
+      main:
+        - name: Posts
+          pageRef: /posts
+          weight: 10
+        - name: About
+          pageRef: /about
+          weight: 20
+  es:
+    contentDir: content/es
+    label: Español
+    locale: es-ES
+    weight: 2
+    menus:
+      main:
+        - name: Artículos
+          pageRef: /posts
+          weight: 10
+        - name: Acerca de
+          pageRef: /about
+          weight: 20
+params: {}
