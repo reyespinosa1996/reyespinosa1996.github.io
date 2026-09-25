@@ -5,6 +5,11 @@ theme: PaperMod
 defaultContentLanguage: en
 languages:
   en:
+    params:
+      homeInfoParams:
+        Title: "Tu Nombre"
+        Content: "DevOps engineer with 5+ years of experience building reliable infrastructure for real-world applications."
+        description: "DevOps engineer with 5+ years of experience building reliable infrastructure for real-world applications."
     contentDir: content/en
     label: English
     locale: en-US
@@ -18,6 +23,11 @@ languages:
           pageRef: /about
           weight: 20
   es:
+    params:
+      homeInfoParams:
+        Title: "Tu Nombre"
+        Content: "Ingeniero DevOps con más de 5 años de experiencia construyendo infraestructura confiable para aplicaciones del mundo real."
+      description: "Ingeniero DevOps con más de 5 años de experiencia construyendo infraestructura confiable para aplicaciones del mundo real."
     contentDir: content/es
     label: Español
     locale: es-ES
@@ -30,4 +40,5 @@ languages:
         - name: Acerca de
           pageRef: /about
           weight: 20
-params: {}
+params: 
+ env: production # to enable google analytics, opengraph, twitter-cards and schema.
