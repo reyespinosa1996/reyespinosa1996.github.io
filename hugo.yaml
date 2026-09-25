@@ -42,3 +42,5 @@ languages:
           weight: 20
 params: 
  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+ keywords: [Blog, Portfolio, PaperMod, DevOps]
+ 
