@@ -7,7 +7,7 @@ languages:
   en:
     params:
       homeInfoParams:
-        Title: "Tu Nombre"
+        Title: "Reinaldo Espinosa"
         Content: "DevOps engineer with 5+ years of experience building reliable infrastructure for real-world applications."
         description: "DevOps engineer with 5+ years of experience building reliable infrastructure for real-world applications."
     contentDir: content/en
@@ -25,7 +25,7 @@ languages:
   es:
     params:
       homeInfoParams:
-        Title: "Tu Nombre"
+        Title: "Reinaldo Espinosa"
         Content: "Ingeniero DevOps con más de 5 años de experiencia construyendo infraestructura confiable para aplicaciones del mundo real."
       description: "Ingeniero DevOps con más de 5 años de experiencia construyendo infraestructura confiable para aplicaciones del mundo real."
     contentDir: content/es
