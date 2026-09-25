@@ -1,7 +1,10 @@
 +++
 date = '2026-09-17T09:37:51-04:00'
 draft = false
-title = 'Ventajas de Hugo Para Crear Tú Sitio Web Personal'
+title = 'Ventajas de Hugo para crear tu sitio web personal'
+summary = "Por qué Hugo es una opción sólida para construir sitios personales rápidos y fáciles de mantener."
+tags = ["hugo", "sitios-estáticos", "desarrollo-web"]
+categories = ["Tools"]
 translationKey = "post-001"
 +++
 

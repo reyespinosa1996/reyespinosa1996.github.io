@@ -2,6 +2,9 @@
 date = '2026-09-17T09:37:51-04:00'
 draft = false
 title = 'Advantages of Hugo for Creating Personal Websites'
+summary = "Why Hugo is a solid choice for building fast, low-maintenance personal websites."
+tags = ["hugo", "static-sites", "web-development"]
+categories = ["Tools"]
 translationKey = "post-001"
 +++
 
