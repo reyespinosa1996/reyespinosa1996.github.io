@@ -8,7 +8,7 @@ categories = ["Tools"]
 translationKey = "post-001"
 
 [cover]
-  image = "/static/images/hugo-logo-wide.svg"
+  image = "/images/hugo-logo-wide.svg"
   alt = "Hugo Logo"
   caption = ""
 +++
