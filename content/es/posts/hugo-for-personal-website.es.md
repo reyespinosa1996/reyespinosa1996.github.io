@@ -6,6 +6,10 @@ summary = "Por qué Hugo es una opción sólida para construir sitios personales
 tags = ["hugo", "sitios-estáticos", "desarrollo-web"]
 categories = ["Tools"]
 translationKey = "post-001"
+[cover]
+  image = "/static/images/hugo-logo-wide.svg"
+  alt = "Hugo Logo"
+  caption = ""
 +++
 
 **Hugo convierte la creación de un sitio personal en un proceso medido en segundos, no en minutos.** Mientras otras herramientas te obligan a esperar entre compilaciones, Hugo renderiza sitios completos en fracciones de segundo, eliminando la fricción entre escribir y publicar.
