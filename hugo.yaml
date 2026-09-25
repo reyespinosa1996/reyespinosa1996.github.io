@@ -43,4 +43,10 @@ languages:
 params: 
  env: production # to enable google analytics, opengraph, twitter-cards and schema.
  keywords: [Blog, Portfolio, PaperMod, DevOps]
- 
+ author: "Reinaldo"
+ defaultTheme: auto
+ ShowReadingTime: true
+ ShowShareButtons: false
+ ShowPostNavLinks: true
+ ShowBreadCrumbs: true
+ ShowCodeCopyButtons: true
