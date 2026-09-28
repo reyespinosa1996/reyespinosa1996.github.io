@@ -50,3 +50,10 @@ params:
  ShowPostNavLinks: true
  ShowBreadCrumbs: true
  ShowCodeCopyButtons: true
+ socialIcons:
+    - name: "github"
+      url: "https://github.com/reyespinosa1996"
+    - name: "linkedin"
+      url: "https://linkedin.com/in/reiespinosa"
+    - name: "email"
+      url: "reinaldo.cuentas@gmail.com"
