@@ -19,7 +19,7 @@ languages:
         - name: Posts
           pageRef: /posts
           weight: 10
-        - name: About
+        - name: About me
           pageRef: /about
           weight: 20
   es:
@@ -37,7 +37,7 @@ languages:
         - name: Artículos
           pageRef: /posts
           weight: 10
-        - name: Acerca de
+        - name: Sobre mi
           pageRef: /about
           weight: 20
 params: 
