@@ -1,7 +1,7 @@
 +++
 date = '2026-09-17T12:46:58-04:00'
 draft = false
-title = 'About'
+title = 'About me'
 type = 'page'
 translationKey =  "about"
 +++
