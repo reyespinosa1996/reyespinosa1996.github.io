@@ -60,3 +60,7 @@ params:
     - name: "email"
       url: "mailto:reinaldo.cuentas@gmail.com"
       title: "Email"
+ analytics:
+    umami:
+      url: "https://cloud.umami.is/script.js"  # o tu URL autoalojada
+      id: "e85cd115-0d87-4f9c-a426-0f53d611e355"                 # el UUID de tu panel de Umami
