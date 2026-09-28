@@ -53,7 +53,10 @@ params:
  socialIcons:
     - name: "github"
       url: "https://github.com/reyespinosa1996"
+      title: "Github"
     - name: "linkedin"
       url: "https://linkedin.com/in/reiespinosa"
+      title: "LinkedIn"
     - name: "email"
-      url: "reinaldo.cuentas@gmail.com"
+      url: "mailto:reinaldo.cuentas@gmail.com"
+      title: "Email"
