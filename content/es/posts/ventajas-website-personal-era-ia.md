@@ -16,7 +16,7 @@ ShowCodeCopyButtons: true
 cover:
   image: "/images/post-002.jpg"
   alt: "Una máquina de escribir con una hoja escrita que dice OPEN SOURCE"
-  caption: "Pie de foto"
+  caption: "Una máquina de escribir con una hoja escrita que dice OPEN SOURCE"
 ---
 
 Hace unos días me quedé pensando en una frase que, aunque suena dura, es bastante real: en el mundo moderno, si no estás en Internet, prácticamente no existes.

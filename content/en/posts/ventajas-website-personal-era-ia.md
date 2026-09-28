@@ -16,7 +16,7 @@ ShowCodeCopyButtons: true
 cover:
   image: "/images/post-002.jpg"
   alt: "A typewriter with a sheet of paper that reads OPEN SOURCE"
-  caption: "Photo caption"
+  caption: "A typewriter with a sheet of paper that reads OPEN SOURCE"
 ---
 
 A few days ago I found myself thinking about a phrase that, although it sounds harsh, is quite true: in the modern world, if you're not on the Internet, you practically don't exist.
