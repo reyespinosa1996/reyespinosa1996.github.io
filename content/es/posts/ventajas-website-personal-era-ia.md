@@ -1,7 +1,7 @@
 ---
 title: "Ventajas de un Sitio Web Personal en la Era de la Inteligencia Artificial"
 date: "2026-09-28T09:47:21-04:00"
-draft: true
+draft: false
 author: ["Reinaldo Espinosa"]
 description: "Cómo un sitio personal para tus proyectos open source te da visibilidad en la era de la IA. Diferénciate del ruido y aporta valor real."
 tags: ["Blog", "IA", "OpenSource"]

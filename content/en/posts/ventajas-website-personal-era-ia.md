@@ -1,7 +1,7 @@
 ---
 title: "Advantages of a Personal Website in the Age of Artificial Intelligence"
 date: "2026-09-28T09:47:21-04:00"
-draft: true
+draft: false
 author: ["Reinaldo Espinosa"]
 description: "How a personal site for your open source projects gives you visibility in the age of AI. Stand out from the noise and deliver real value."
 tags: ["Blog", "AI", "OpenSource"]
