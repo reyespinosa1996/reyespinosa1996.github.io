@@ -1,6 +1,6 @@
 baseURL: https://reyespinosa.is-a.dev
 locale: en-us
-title: Reinaldo Espinosa · Personal Site
+title: Rey Espinosa
 theme: PaperMod
 defaultContentLanguage: en
 languages:
@@ -26,6 +26,8 @@ languages:
     params:
       homeInfoParams:
         Title: "Reinaldo Espinosa"
+        label:
+          text: "Reinaldo Espinosa"
         Content: "Ingeniero DevOps con más de 5 años de experiencia construyendo infraestructura confiable para aplicaciones del mundo real."
       description: "Ingeniero DevOps con más de 5 años de experiencia construyendo infraestructura confiable para aplicaciones del mundo real."
     contentDir: content/es
