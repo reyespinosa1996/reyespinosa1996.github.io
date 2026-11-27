@@ -1,0 +1,39 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  /** Devuelve la URL de una página concreta. */
+  urlForPage: (page: number) => string;
+}
+
+const { currentPage, totalPages, urlForPage } = Astro.props;
+const prev = currentPage > 1 ? currentPage - 1 : null;
+const next = currentPage < totalPages ? currentPage + 1 : null;
+---
+
+{totalPages > 1 && (
+  <nav class="pagination" aria-label="Pagination">
+    <span>
+      {prev ? (
+        <a href={urlForPage(prev)} rel="prev">← Previous</a>
+      ) : (
+        <span aria-hidden="true">← Previous</span>
+      )}
+    </span>
+    <span class="pagination-status">{currentPage} / {totalPages}</span>
+    <span>
+      {next ? (
+        <a href={urlForPage(next)} rel="next">Next →</a>
+      ) : (
+        <span aria-hidden="true">Next →</span>
+      )}
+    </span>
+  </nav>
+)}
+
+<style>
+  .pagination-status {
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+</style>

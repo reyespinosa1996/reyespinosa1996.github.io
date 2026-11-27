@@ -1,0 +1,88 @@
+---
+import '../styles/global.css';
+import { i18n as enI18n } from '../i18n/en';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Seo from '../components/Seo.astro';
+import type { Lang } from '../lib/content';
+
+const siteTitle = enI18n.siteTitle;
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: Lang;
+  canonical?: string;
+  translations?: { lang: string; url: string }[];
+  image?: string;
+  type?: 'website' | 'blog';
+  translationKey?: string;
+  kind?: 'home' | 'post' | 'page' | 'list';
+  publishedDate?: Date;
+  modifiedDate?: Date;
+}
+
+const {
+  title = '',
+  description = '',
+  lang = 'en',
+  canonical,
+  translations,
+  image,
+  type = 'website',
+  translationKey,
+  kind = 'home',
+  publishedDate,
+  modifiedDate,
+} = Astro.props;
+
+const canonicalPath = canonical ?? '/';
+---
+
+
+<html lang={lang} data-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Astro" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title ? `${title} · ${siteTitle}` : siteTitle}</title>
+    <meta name="description" content={description} />
+
+    <Seo
+      title={title}
+      description={description}
+      canonical={canonicalPath}
+      alternates={translations}
+      image={image}
+      type={type}
+      lang={lang}
+      publishedDate={publishedDate}
+      modifiedDate={modifiedDate}
+    />
+
+    <!-- Umami analytics (single instance) -->
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="e85cd115-0d87-4f9c-a426-0f53d611e355"
+    ></script>
+
+    <!-- Theme bootstrap: avoid FOUC -->
+    <script>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored || (prefersDark ? 'dark' : 'auto');
+        if (theme === 'dark' || (theme === 'auto' && prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <Header lang={lang} translationKey={translationKey} kind={kind} />
+    <main class="main"><slot /></main>
+    <Footer />
+  </body>
+</html>

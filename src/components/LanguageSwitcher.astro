@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import { i18n as enI18n } from '../i18n/en';
+import { i18n as esI18n } from '../i18n/es';
+import { langPrefix, otherLang, postUrl, slugOf, type Lang } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  translationKey?: string;
+  /** Tipo de contenido de la página actual, para resolver la URL equivalente. */
+  kind?: 'home' | 'post' | 'page' | 'list';
+}
+
+const { lang, translationKey, kind = 'home' } = Astro.props;
+const i18n = lang === 'es' ? esI18n : enI18n;
+const target = otherLang(lang);
+
+let targetHref = `${langPrefix(target)}/`;
+
+if (translationKey && kind !== 'home') {
+  const [posts, pages] = await Promise.all([
+    getCollection('posts'),
+    getCollection('pages'),
+  ]);
+
+  const pool = kind === 'post' ? posts : pages;
+
+  const match = pool.find(
+    (entry) => entry.data.translationKey === translationKey && entry.data.lang === target,
+  );
+
+  if (match) {
+    targetHref =
+      kind === 'post'
+        ? postUrl(match as (typeof posts)[number])
+        : `${langPrefix(target)}/${slugOf(match)}/`;
+  }
+}
+---
+
+<a class="lang-switch" href={targetHref} hreflang={target} aria-label={i18n.langSwitch.label}>
+  {target === 'es' ? 'ES' : 'EN'}
+</a>

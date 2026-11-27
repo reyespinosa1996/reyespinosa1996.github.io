@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+import { i18n as enI18n } from '../i18n/en';
+import { i18n as esI18n } from '../i18n/es';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { publishedEntries, taxonomyTerms } from '../lib/content';
+
+interface Props {
+  lang: 'en' | 'es';
+  field: 'tags' | 'categories';
+}
+
+const { lang, field } = Astro.props;
+const i18n = lang === 'es' ? esI18n : enI18n;
+
+const entries = publishedEntries(await getCollection('posts'), lang);
+const terms = taxonomyTerms(entries, field);
+
+const label = field === 'tags' ? i18n.post.tags : i18n.post.categories;
+const base = lang === 'es' ? '/es' : '';
+---
+
+<BaseLayout
+  title={label}
+  description={i18n.siteDescription}
+  lang={lang}
+  canonical={`${base}/${field}/`}
+  translations={[{ lang: lang === 'es' ? 'en' : 'es', url: `${lang === 'es' ? '' : '/es'}/${field}/` }]}
+  kind="list"
+>
+  <h1 class="section-title">{label}</h1>
+
+  {terms.length > 0 ? (
+    <ul class="taxonomy-list">
+      {terms.map((t) => (
+        <li>
+          <a href={`${base}/${field}/${encodeURIComponent(t.slug)}/`}>{t.term}</a>
+          <span class="taxonomy-count">({t.count})</span>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="no-results">No hay términos todavía.</p>
+  )}
+</BaseLayout>
+
+<style>
+  .taxonomy-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .taxonomy-list li {
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .taxonomy-count {
+    color: var(--muted);
+    font-size: 0.875rem;
+    margin-left: 0.25rem;
+  }
+</style>

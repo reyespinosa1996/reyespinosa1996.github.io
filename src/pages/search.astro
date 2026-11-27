@@ -1,0 +1,18 @@
+---
+import { i18n } from '../i18n/en';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchBox from '../components/SearchBox.astro';
+---
+
+  <BaseLayout
+    title={i18n.search.label}
+    description={i18n.siteDescription}
+    lang="en"
+    canonical="/search/"
+    translations={[{ lang: 'es', url: '/es/search/' }]}
+    kind="list"
+  >
+    <h1 class="section-title">{i18n.search.label}</h1>
+
+    <SearchBox lang="en" />
+  </BaseLayout>

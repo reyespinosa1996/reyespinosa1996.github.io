@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import PostsIndexLayout from '../../../../layouts/PostsIndexLayout.astro';
+import { publishedEntries } from '../../../../lib/content';
+import { paginate } from '../../../../lib/pagination';
+
+export async function getStaticPaths() {
+  const entries = publishedEntries(await getCollection('posts'), 'es');
+  const totalPages = paginate(entries).length;
+
+  // La página 1 vive en la ruta canónica `/es/posts/`; esta ruta cubre la 2 en adelante.
+  return Array.from({ length: Math.max(totalPages - 1, 0) }, (_, i) => ({
+    params: { page: String(i + 2) },
+    props: { page: i + 2 },
+  }));
+}
+
+const { page } = Astro.props;
+---
+
+  <PostsIndexLayout lang="es" page={page} />

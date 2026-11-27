@@ -1,0 +1,224 @@
+---
+import { i18n as enI18n } from '../i18n/en';
+import { i18n as esI18n } from '../i18n/es';
+import type { Lang } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const i18n = lang === 'es' ? esI18n : enI18n;
+const indexUrl = lang === 'es' ? '/es/index.json' : '/index.json';
+---
+
+  <div
+    class="search-box"
+    data-index-url={indexUrl}
+    data-no-results={i18n.search.noResults}
+    data-result={i18n.search.result}
+    data-results-label={i18n.search.results}
+    data-load-error={i18n.search.loadError}
+  >
+    <label class="search-label" for="search-input">{i18n.search.label}</label>
+    <input
+      id="search-input"
+      type="search"
+      class="search-input"
+      placeholder={i18n.search.placeholder}
+      autocomplete="off"
+      aria-describedby="search-status"
+    />
+
+    <p id="search-status" class="search-status" role="status" aria-live="polite"></p>
+
+    <ul class="search-results" data-results hidden></ul>
+  </div>
+
+<script>
+  import Fuse from 'fuse.js';
+
+  interface SearchDocument {
+    title: string;
+    description: string;
+    url: string;
+    tags: string[];
+    categories: string[];
+    content: string;
+  }
+
+  const roots = document.querySelectorAll<HTMLElement>('.search-box');
+
+  for (const root of roots) {
+    const indexUrl = root.dataset.indexUrl ?? '/index.json';
+    const input = root.querySelector<HTMLInputElement>('.search-input');
+    const status = root.querySelector<HTMLElement>('.search-status');
+    const results = root.querySelector<HTMLUListElement>('[data-results]');
+
+    if (!input || !status || !results) continue;
+
+    let fuse: Fuse<SearchDocument> | null = null;
+    let loading = false;
+
+    const setStatus = (message: string) => {
+      status.textContent = message;
+    };
+
+    const clearResults = () => {
+      results.innerHTML = '';
+      results.hidden = true;
+    };
+
+    const render = (documents: SearchDocument[], query: string) => {
+      results.innerHTML = '';
+
+      if (documents.length === 0) {
+        results.hidden = true;
+        setStatus(noResultsText);
+        return;
+      }
+
+      for (const doc of documents) {
+        const item = document.createElement('li');
+        item.className = 'search-result';
+
+        const link = document.createElement('a');
+        link.href = doc.url;
+        link.textContent = doc.title;
+
+        const summary = document.createElement('p');
+        summary.className = 'search-result-description';
+        summary.textContent = doc.description || excerpt(doc.content, query);
+
+        item.append(link, summary);
+        results.append(item);
+      }
+
+      results.hidden = false;
+      setStatus(`${documents.length} ${documents.length === 1 ? resultText : resultsText}`);
+    };
+
+    const excerpt = (content: string, query: string) => {
+      const index = content.toLowerCase().indexOf(query.toLowerCase());
+      if (index === -1) return content.slice(0, 140);
+      const start = Math.max(0, index - 40);
+      return `${start > 0 ? '…' : ''}${content.slice(start, start + 180)}…`;
+    };
+
+    const noResultsText = root.dataset.noResults ?? 'No results found';
+    const resultText = root.dataset.result ?? 'result';
+    const resultsText = root.dataset.resultsLabel ?? 'results';
+    const loadErrorText = root.dataset.loadError ?? 'Error loading the search index';
+
+    const load = async () => {
+      if (fuse || loading) return;
+      loading = true;
+
+      try {
+        const response = await fetch(indexUrl);
+        const documents = (await response.json()) as SearchDocument[];
+        fuse = new Fuse(documents, {
+          keys: [
+            { name: 'title', weight: 3 },
+            { name: 'description', weight: 2 },
+            { name: 'tags', weight: 2 },
+            { name: 'categories', weight: 2 },
+            { name: 'content', weight: 1 },
+          ],
+          threshold: 0.35,
+          ignoreLocation: true,
+          includeScore: true,
+          minMatchCharLength: 2,
+        });
+      } catch {
+        setStatus(loadErrorText);
+      } finally {
+        loading = false;
+      }
+    };
+
+    const run = async () => {
+      const query = input.value.trim();
+
+      if (query.length < 2) {
+        clearResults();
+        setStatus('');
+        return;
+      }
+
+      await load();
+
+      if (!fuse) return;
+
+      render(fuse.search(query).map((result) => result.item), query);
+    };
+
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    input.addEventListener('input', () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(run, 150);
+    });
+
+    input.addEventListener('search', run);
+  }
+</script>
+
+<style>
+  .search-box {
+    width: 100%;
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+
+  .search-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: var(--bg-secondary);
+    color: var(--fg);
+    font: inherit;
+  }
+
+  .search-input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .search-status {
+    min-height: 1.5rem;
+    margin: 0.5rem 0;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .search-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .search-result {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .search-result a {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .search-result-description {
+    margin: 0.25rem 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+</style>

@@ -1,0 +1,106 @@
+---
+import { render, getCollection, type CollectionEntry } from 'astro:content';
+import { i18n as enI18n } from '../i18n/en';
+import { i18n as esI18n } from '../i18n/es';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import { readingTime } from '../lib/reading-time';
+import { langPrefix, otherLang, postUrl, slugifyTerm } from '../lib/content';
+
+interface Props {
+  entry: CollectionEntry<'posts'>;
+}
+
+const { entry } = Astro.props;
+const { data, body } = entry;
+const { title, date, description, tags, categories, cover, lang, toc } = data;
+const { Content, headings } = await render(entry);
+const i18n = lang === 'es' ? esI18n : enI18n;
+const readTime = readingTime(body ?? '');
+
+const canonical = postUrl(entry);
+
+const allPosts = await getCollection('posts');
+const translated = allPosts.find(
+  (e) => e.data.translationKey === data.translationKey && e.data.lang === otherLang(lang),
+);
+const translations = translated ? [{ lang: otherLang(lang), url: postUrl(translated) }] : [];
+
+const image = cover?.image;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang={lang}
+  canonical={canonical}
+  translations={translations}
+  image={image}
+  type="blog"
+  publishedDate={date}
+  modifiedDate={date}
+  translationKey={data.translationKey}
+  kind="post"
+>
+  <article>
+    <header class="post-header">
+      <h1>{title}</h1>
+      <div class="post-meta">
+        <time>{new Date(date).toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}</time>
+        <span>·</span>
+        <span>{readTime} {i18n.post.readingTime}</span>
+      </div>
+      {cover && (
+        <div class="post-cover">
+          <img src={cover.image} alt={cover.alt} />
+          {cover.caption && <p style="font-size: 0.875rem; color: var(--muted); margin-top: 0.25rem;">{cover.caption}</p>}
+        </div>
+      )}
+    </header>
+
+    {toc && headings.length > 0 && <TableOfContents headings={headings} />}
+
+    <Content />
+
+    <footer class="post-footer">
+      {tags.length > 0 && (
+        <div class="post-tags">
+          <span class="post-tags-label">{i18n.post.tags}:</span>
+          {tags.map((tag) => (
+            <a class="post-tag" href={`${langPrefix(lang)}/tags/${encodeURIComponent(slugifyTerm(tag))}/`}>{tag}</a>
+          ))}
+        </div>
+      )}
+      {categories.length > 0 && (
+        <div class="post-tags">
+          <span class="post-tags-label">{i18n.post.categories}:</span>
+          {categories.map((cat) => (
+            <a class="post-tag" href={`${langPrefix(lang)}/categories/${encodeURIComponent(slugifyTerm(cat))}/`}>{cat}</a>
+          ))}
+        </div>
+      )}
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-footer {
+    margin-top: 2rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  .post-tags-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .post-tag {
+    text-decoration: none;
+  }
+</style>

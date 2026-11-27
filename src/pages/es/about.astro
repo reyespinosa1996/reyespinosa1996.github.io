@@ -1,0 +1,12 @@
+---
+import { getEntry } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const entry = await getEntry('pages', 'es/about');
+
+if (!entry) {
+  throw new Error('No se encontró la página es/about');
+}
+---
+
+  <PageLayout entry={entry} />

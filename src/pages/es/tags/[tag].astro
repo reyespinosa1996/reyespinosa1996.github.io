@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import TaxonomyTermLayout from '../../../layouts/TaxonomyTermLayout.astro';
+import { publishedEntries, taxonomyTerms } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const entries = publishedEntries(await getCollection('posts'), 'es');
+  const terms = taxonomyTerms(entries, 'tags');
+
+  return terms.map((t) => ({
+    params: { tag: t.slug },
+    props: { term: t.term, termSlug: t.slug },
+  }));
+}
+
+const { term, termSlug } = Astro.props;
+---
+
+  <TaxonomyTermLayout lang="es" field="tags" term={term} termSlug={termSlug} />

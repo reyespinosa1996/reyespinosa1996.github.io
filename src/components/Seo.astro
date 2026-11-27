@@ -1,0 +1,105 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  /** Ruta canónica relativa, por ejemplo "/posts/mi-post/". */
+  canonical?: string;
+  /** URLs alternativas por idioma (la página actual se incluye automáticamente). */
+  alternates?: { lang: string; url: string }[];
+  image?: string;
+  type?: 'website' | 'blog';
+  lang?: string;
+  /** Fecha de publicación (ISO) para el JSON-LD de las entradas. */
+  publishedDate?: Date;
+  /** Fecha de modificación (ISO) para el JSON-LD de las entradas. */
+  modifiedDate?: Date;
+}
+
+const {
+  title,
+  description,
+  canonical = '/',
+  alternates = [],
+  image,
+  type = 'website',
+  lang = 'en',
+  publishedDate,
+  modifiedDate,
+} = Astro.props;
+
+const siteName = 'Reinaldo Espinosa · Blog';
+const site = Astro.site ?? new URL('https://reyespinosa.is-a.dev');
+const siteUrl = site.origin;
+
+const canonicalUrl = new URL(canonical, site).href;
+const ogImage = image ? new URL(image, site).href : undefined;
+
+const hreflangLinks = [
+  { lang, url: canonical },
+  ...alternates.filter((a) => a.url !== canonical),
+];
+
+const defaultUrl =
+  hreflangLinks.find((l) => l.lang === 'en')?.url ?? hreflangLinks[0]?.url ?? canonical;
+
+const jsonLd =
+  type === 'blog'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: title,
+        description,
+        url: canonicalUrl,
+        image: ogImage,
+        datePublished: publishedDate?.toISOString(),
+        dateModified: (modifiedDate ?? publishedDate)?.toISOString(),
+        author: {
+          '@type': 'Person',
+          name: 'Reinaldo Espinosa',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Reinaldo Espinosa',
+          url: siteUrl,
+        },
+        inLanguage: lang,
+      }
+    : {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: siteName,
+        description,
+        url: canonicalUrl,
+        publisher: {
+          '@type': 'Organization',
+          name: 'Reinaldo Espinosa',
+          url: siteUrl,
+        },
+        inLanguage: lang,
+      };
+---
+
+  <link rel="canonical" href={canonicalUrl} />
+
+  {hreflangLinks.map((l) => (
+    <link rel="alternate" hreflang={l.lang} href={new URL(l.url, site).href} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={new URL(defaultUrl, site).href} />
+
+  {/* Open Graph */}
+  <meta property="og:title" content={title ?? siteName} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content={type === 'blog' ? 'article' : 'website'} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+
+  {/* Twitter Cards */}
+  <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+  <meta name="twitter:title" content={title ?? siteName} />
+  <meta name="twitter:description" content={description} />
+  {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+  {/* JSON-LD */}
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

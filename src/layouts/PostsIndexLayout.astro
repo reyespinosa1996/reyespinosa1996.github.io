@@ -1,0 +1,45 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { i18n as enI18n } from '../i18n/en';
+import { i18n as esI18n } from '../i18n/es';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import Pagination from '../components/Pagination.astro';
+import { publishedEntries } from '../lib/content';
+import { paginate, postsPageUrl } from '../lib/pagination';
+
+interface Props {
+  lang: 'en' | 'es';
+  /** Número de página (1 = ruta canónica). */
+  page?: number;
+}
+
+const { lang, page = 1 } = Astro.props;
+const i18n = lang === 'es' ? esI18n : enI18n;
+
+const all = publishedEntries(await getCollection('posts'), lang);
+const pages = paginate(all);
+const totalPages = pages.length;
+const entries: CollectionEntry<'posts'>[] = pages[page - 1] ?? [];
+
+const canonical = postsPageUrl(lang, 1);
+const translations = [{ lang: lang === 'es' ? 'en' : 'es', url: canonical }];
+---
+
+<BaseLayout
+  title={i18n.nav.posts}
+  description={i18n.siteDescription}
+  lang={lang}
+  canonical={canonical}
+  translations={translations}
+  translationKey="blog-list"
+  kind="list"
+>
+  <h1 class="section-title">{i18n.nav.posts}</h1>
+  <PostList entries={entries} />
+  <Pagination
+    currentPage={page}
+    totalPages={totalPages}
+    urlForPage={(p) => postsPageUrl(lang, p)}
+  />
+</BaseLayout>

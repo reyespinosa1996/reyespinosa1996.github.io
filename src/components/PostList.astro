@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PostCard from './PostCard.astro';
+
+interface Props {
+  entries: CollectionEntry<'posts'>[];
+}
+
+const { entries } = Astro.props;
+---
+
+{entries.length > 0 ? (
+  <div class="post-list">
+    {entries.map((entry) => (
+      <PostCard entry={entry} />
+    ))}
+  </div>
+) : (
+  <p class="no-results">No hay artículos todavía.</p>
+)}

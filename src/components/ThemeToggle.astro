@@ -1,0 +1,62 @@
+---
+import { i18n as enI18n } from '../i18n/en';
+import { i18n as esI18n } from '../i18n/es';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const i18n = lang === 'es' ? esI18n : enI18n;
+---
+
+<button class="theme-toggle" id="theme-toggle" aria-label={i18n.theme.label} title={i18n.theme.label}>
+  <span id="theme-toggle-icon" aria-hidden="true">🌓</span>
+</button>
+
+<script is:inline>
+  (function () {
+    const STORAGE_KEY = 'theme';
+
+    function systemTheme() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function currentTheme() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored === 'light' || stored === 'dark' ? stored : 'auto';
+    }
+
+    function apply(theme) {
+      const resolved = theme === 'auto' ? systemTheme() : theme;
+      document.documentElement.setAttribute('data-theme', resolved);
+      document.documentElement.setAttribute('data-theme-choice', theme);
+    }
+
+    const icons = { auto: '🌓', light: '☀️', dark: '🌙' };
+
+    function syncIcon() {
+      const icon = document.getElementById('theme-toggle-icon');
+      if (icon) {
+        icon.textContent = icons[currentTheme()];
+      }
+    }
+
+    apply(currentTheme());
+
+    document.addEventListener('DOMContentLoaded', () => {
+      syncIcon();
+
+      const toggle = document.getElementById('theme-toggle');
+      if (!toggle) return;
+
+      toggle.addEventListener('click', () => {
+        const order = ['auto', 'light', 'dark'];
+        const next = order[(order.indexOf(currentTheme()) + 1) % order.length];
+        localStorage.setItem(STORAGE_KEY, next);
+        apply(next);
+        syncIcon();
+      });
+    });
+  })();
+</script>

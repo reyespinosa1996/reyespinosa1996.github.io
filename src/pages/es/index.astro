@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import { i18n } from '../../i18n/es';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { publishedEntries } from '../../lib/content';
+
+const entries = publishedEntries(await getCollection('posts'), 'es');
+---
+
+<BaseLayout
+  title=""
+  description={i18n.siteDescription}
+  lang="es"
+  canonical="/es/"
+  translations={[{ lang: 'en', url: '/' }]}
+  kind="home"
+>
+  <section class="home-intro">
+    <h1>{i18n.home.title}</h1>
+    <p>{i18n.home.intro}</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">{i18n.nav.posts}</h2>
+    <PostList entries={entries} />
+  </section>
+</BaseLayout>
+
+<style>
+  .home-intro {
+    margin-bottom: 3rem;
+  }
+
+  .home-intro h1 {
+    margin-top: 0;
+  }
+
+  .home-intro p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 42rem;
+  }
+</style>

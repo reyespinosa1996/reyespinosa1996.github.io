@@ -1,0 +1,23 @@
+---
+import { i18n } from '../i18n/en';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title={i18n.notFound.title}
+  description={i18n.notFound.message}
+  lang="en"
+  canonical="/404.html"
+  kind="home"
+>
+  <div class="not-found">
+    <h1>404</h1>
+    <h2>{i18n.notFound.title}</h2>
+    <p>{i18n.notFound.message}</p>
+    <p>
+      <a href="/">{i18n.notFound.home}</a>
+      &nbsp;|&nbsp;
+      <a href="/posts/">{i18n.notFound.posts}</a>
+    </p>
+  </div>
+</BaseLayout>

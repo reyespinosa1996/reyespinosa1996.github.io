@@ -1,0 +1,44 @@
+---
+import { render, getCollection, type CollectionEntry } from 'astro:content';
+import { i18n as enI18n } from '../i18n/en';
+import { i18n as esI18n } from '../i18n/es';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { langPrefix, otherLang, slugOf } from '../lib/content';
+
+interface Props {
+  entry: CollectionEntry<'pages'>;
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { title, description, lang, translationKey } = data;
+const { Content } = await render(entry);
+const i18n = lang === 'es' ? esI18n : enI18n;
+
+const canonical = `${langPrefix(lang)}/${slugOf(entry)}/`;
+
+const allPages = await getCollection('pages');
+const translated = allPages.find(
+  (e) => e.data.translationKey === translationKey && e.data.lang === otherLang(lang),
+);
+const translations = translated
+  ? [{ lang: otherLang(lang), url: `${langPrefix(otherLang(lang))}/${slugOf(translated)}/` }]
+  : [];
+---
+
+<BaseLayout
+  title={title}
+  description={description ?? i18n.siteDescription}
+  lang={lang}
+  canonical={canonical}
+  translations={translations}
+  translationKey={translationKey}
+  kind="page"
+>
+  <article>
+    <header class="post-header">
+      <h1>{title}</h1>
+    </header>
+    <Content />
+  </article>
+</BaseLayout>

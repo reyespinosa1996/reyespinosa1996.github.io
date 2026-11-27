@@ -1,0 +1,38 @@
+---
+import { i18n as enI18n } from '../i18n/en';
+import { i18n as esI18n } from '../i18n/es';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import type { Lang } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  translationKey?: string;
+  kind?: 'home' | 'post' | 'page' | 'list';
+}
+
+const { lang, translationKey, kind = 'home' } = Astro.props;
+const i18n = lang === 'es' ? esI18n : enI18n;
+const prefix = lang === 'es' ? '/es' : '';
+---
+
+<header class="header">
+  <a href={`${prefix}/`} class="logo">Reinaldo Espinosa · Blog</a>
+
+  <nav class="nav" aria-label="Main navigation">
+    <a href={`${prefix}/`}>{i18n.nav.home}</a>
+    <a href={`${prefix}/posts/`}>{i18n.nav.posts}</a>
+    <a href={`${prefix}/about/`}>{i18n.nav.about}</a>
+    <a href={`${prefix}/search/`}>{i18n.nav.search}</a>
+
+    <LanguageSwitcher lang={lang} translationKey={translationKey} kind={kind} />
+    <ThemeToggle lang={lang} />
+  </nav>
+</header>
+
+<style>
+  .lang-switch,
+  .theme-toggle {
+    margin-left: 0.5rem;
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { i18n as enI18n } from '../i18n/en';
+import { i18n as esI18n } from '../i18n/es';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import { publishedEntries, slugifyTerm } from '../lib/content';
+
+interface Props {
+  lang: 'en' | 'es';
+  field: 'tags' | 'categories';
+  /** Slug del término (URL). */
+  termSlug: string;
+  /** Término original, para mostrarlo como título. */
+  term: string;
+}
+
+const { lang, field, termSlug, term } = Astro.props;
+const i18n = lang === 'es' ? esI18n : enI18n;
+
+const all = publishedEntries(await getCollection('posts'), lang);
+const entries: CollectionEntry<'posts'>[] = all.filter((entry) =>
+  entry.data[field].some((value) => slugifyTerm(value) === termSlug),
+);
+
+const label = field === 'tags' ? i18n.post.tags : i18n.post.categories;
+const base = lang === 'es' ? '/es' : '';
+---
+
+<BaseLayout
+  title={`${term} · ${label}`}
+  description={i18n.siteDescription}
+  lang={lang}
+  canonical={`${base}/${field}/${encodeURIComponent(termSlug)}/`}
+  translations={[{ lang: lang === 'es' ? 'en' : 'es', url: `${lang === 'es' ? '' : '/es'}/${field}/${encodeURIComponent(termSlug)}/` }]}
+  kind="list"
+>
+  <h1 class="section-title">{term}</h1>
+  <p class="section-description">
+    {label}: {term} ({entries.length})
+  </p>
+
+  <PostList entries={entries} />
+</BaseLayout>

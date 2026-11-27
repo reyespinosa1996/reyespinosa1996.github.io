@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import { publishedEntries, slugOf } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const entries = publishedEntries(await getCollection('posts'), 'en');
+
+  return entries.map((entry) => ({
+    params: { slug: slugOf(entry) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+---
+
+  <PostLayout entry={entry} />
