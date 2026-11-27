@@ -32,7 +32,6 @@ const base = lang === 'es' ? '/es' : '';
   description={i18n.siteDescription}
   lang={lang}
   canonical={`${base}/${field}/${encodeURIComponent(termSlug)}/`}
-  translations={[{ lang: lang === 'es' ? 'en' : 'es', url: `${lang === 'es' ? '' : '/es'}/${field}/${encodeURIComponent(termSlug)}/` }]}
   kind="list"
 >
   <h1 class="section-title">{term}</h1>
