@@ -100,18 +100,18 @@ Verificación adicional:
 git check-ignore -v public/CNAME   # no debe estar ignorado
 test -f dist/CNAME && cat dist/CNAME
 curl -I https://reyespinosa.is-a.dev/
-openspec validate migrate-hugo-to-astro
+openspec validate --specs
 ```
 
 ## Historial de la migración
 
-El plan, las specs y las tareas de la migración ya completada están en:
+El plan, las specs y las tareas de la migración ya completada están archivadas en:
 
-- `openspec/changes/migrate-hugo-to-astro/proposal.md`
-- `openspec/changes/migrate-hugo-to-astro/design.md`
-- `openspec/changes/migrate-hugo-to-astro/specs/site-hosting/spec.md`
-- `openspec/changes/migrate-hugo-to-astro/specs/content-and-routing/spec.md`
-- `openspec/changes/migrate-hugo-to-astro/tasks.md`
+- `openspec/changes/archive/2026-11-27-migrate-hugo-to-astro/proposal.md`
+- `openspec/changes/archive/2026-11-27-migrate-hugo-to-astro/design.md`
+- `openspec/changes/archive/2026-11-27-migrate-hugo-to-astro/specs/site-hosting/spec.md`
+- `openspec/changes/archive/2026-11-27-migrate-hugo-to-astro/specs/content-and-routing/spec.md`
+- `openspec/changes/archive/2026-11-27-migrate-hugo-to-astro/tasks.md`
 
 ## Referencias
 

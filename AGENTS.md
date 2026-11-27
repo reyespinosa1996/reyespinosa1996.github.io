@@ -92,7 +92,7 @@ curl -s http://localhost:4321/index.xml | head
 curl -s http://localhost:4321/sitemap.xml | head
 curl -s http://localhost:4321/index.json | head
 curl -I https://reyespinosa.is-a.dev/
-openspec validate migrate-hugo-to-astro
+openspec validate --specs
 ```
 
 Toda verificación debe incluir una comprobación real en navegador (DOM/screenshot), no solo HTML generado: el build puede pasar aunque las páginas estén en blanco.
