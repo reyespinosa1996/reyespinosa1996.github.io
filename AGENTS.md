@@ -23,6 +23,7 @@ Instrucciones operativas para agentes que trabajen en este repositorio. Léelas 
 8. **No cambies las URLs públicas** sin una decisión explícita del usuario. Inglés en `/`, español en `/es/`, con barra final.
 9. **No reintroduzcas Hugo, PaperMod ni sus submódulos.**
 10. El tag `pre-astro-migration` se conserva como referencia de rollback; no lo borres.
+11. **Excepción acotada: CMS estático git-first.** Se permite `public/admin/` con Sveltia CMS cargado desde CDN para editar los mismos archivos Markdown/YAML de `src/content/**`. No se permite servidor, base de datos, backend propio, OAuth, dependencias npm nuevas ni cambios en Pages, DNS, dominio o URLs públicas. Cualquier ampliación del alcance requiere confirmación.
 
 ## 3. Fronteras de archivos
 
@@ -30,7 +31,7 @@ Instrucciones operativas para agentes que trabajen en este repositorio. Léelas 
 
 - `astro.config.mjs`, `package.json`, `package-lock.json`, `tsconfig.json`, `.nvmrc`.
 - `src/**` (componentes, layouts, páginas, contenido, i18n, estilos, utilidades).
-- `public/**` (CNAME, imágenes, favicon, robots.txt).
+- `public/**` (CNAME, imágenes, favicon, robots.txt, `admin/`).
 - `.github/workflows/deploy.yml`.
 - `.gitignore`, `README.md`, `AGENTS.md`, `openspec/**`.
 
@@ -44,6 +45,7 @@ Instrucciones operativas para agentes que trabajen en este repositorio. Léelas 
 - Dependencias nuevas fuera de Astro, `@astrojs/check`, `typescript`, `@astrojs/rss`, `fuse.js` y los plugins de markdown ya instalados.
 - Cualquier cambio en Pages, DNS, remoto o rama por defecto.
 - Rediseño visual que vaya más allá del blog funcional acordado.
+- Cualquier CMS o backend que no sea el admin estático git-first ya aprobado en `public/admin/`.
 
 ## 4. Convenciones de Astro
 

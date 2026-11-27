@@ -13,7 +13,7 @@ Sitio web personal de Reinaldo Espinosa, publicado en GitHub Pages bajo el domin
 - Presentación: layouts Astro nativos y funcionales, no una réplica pixel-perfect de PaperMod.
 - Paridad funcional: posts, About, tags, categorías, RSS, sitemap, 404, SEO/Open Graph/Twitter/JSON-LD, Umami, modo claro/oscuro y selector de idioma.
 - Búsqueda: client-side con Fuse.js en `/search/` y `/es/search/`, con índices `/index.json` y `/es/index.json`.
-- Assets: `public/` versionado, con `public/CNAME`, `favicon.svg`, imágenes y `robots.txt`.
+- Assets: `public/` versionado, con `public/CNAME`, `favicon.svg`, imágenes, `robots.txt` y el admin estático en `public/admin/`.
 - Despliegue: GitHub Actions (`.github/workflows/deploy.yml`) con `withastro/action@v6` y `actions/deploy-pages@v5`, verificación de `dist/CNAME` incluida.
 - Rollback: tag local `pre-astro-migration` con el último estado Hugo.
 
@@ -24,6 +24,7 @@ Sitio web personal de Reinaldo Espinosa, publicado en GitHub Pages bajo el domin
 ├── .github/workflows/deploy.yml
 ├── public/
 │   ├── CNAME
+│   ├── admin/
 │   ├── favicon.svg
 │   ├── images/
 │   ├── img/
@@ -72,6 +73,7 @@ Sitio web personal de Reinaldo Espinosa, publicado en GitHub Pages bajo el domin
 - Los pares de traducción se enlazan por `translationKey`.
 - Los archivos españoles no conservan el sufijo `.es.md`; el idioma se determina por la carpeta y el campo `lang`.
 - Los títulos de listados viven en las páginas o en el diccionario i18n, no en `_index.md`.
+- Autoría: Sveltia CMS se sirve como archivos estáticos desde `public/admin/` y edita directamente los mismos Markdown/YAML de `src/content/**`; el flujo local no requiere credenciales y la edición remota con token personal es opcional.
 
 ## Restricciones
 
@@ -82,7 +84,7 @@ Sitio web personal de Reinaldo Espinosa, publicado en GitHub Pages bajo el domin
 - No eliminar `CNAME`, `README.md` ni `TODO.md`.
 - Preservar las URLs públicas actuales y los slugs.
 - No reintroducir Hugo, PaperMod ni sus submódulos.
-- No introducir un rediseño de marca ni funciones fuera del alcance (comentarios, newsletter, CMS, backend).
+- No introducir un rediseño de marca ni funciones fuera del alcance (comentarios, newsletter, CMS con servidor o backend). Se permite únicamente el admin estático git-first en `public/admin/`.
 
 ## Comandos
 

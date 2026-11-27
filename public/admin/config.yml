@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: reyespinosa1996/reyespinosa1996.github.io
+  branch: master
+
+site_url: https://reyespinosa.is-a.dev
+
+media_folder: public/images
+public_folder: /images
+
+i18n:
+  structure: multiple_folders
+  locales: [en, es]
+  default_locale: en
+  initial_locales: [en, es]
+
+output:
+  omit_empty_optional_fields: true
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: src/content/posts
+    format: yaml-frontmatter
+    i18n: true
+    fields:
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Date, name: date, widget: datetime, default: '{{now}}', i18n: duplicate }
+      - { label: Draft, name: draft, widget: boolean, default: true, i18n: duplicate }
+      - { label: Language, name: lang, widget: hidden, default: '{{locale}}', i18n: true }
+      - { label: Translation Key, name: translationKey, widget: hidden, default: '{{uuid_short}}', i18n: duplicate }
+      - { label: Description, name: description, widget: text, required: false, i18n: true }
+      - { label: Author, name: author, widget: list, required: false, i18n: duplicate }
+      - { label: Tags, name: tags, widget: list, required: false, i18n: true }
+      - { label: Categories, name: categories, widget: list, required: false, i18n: duplicate }
+      - label: Cover
+        name: cover
+        widget: object
+        required: false
+        i18n: duplicate
+        fields:
+          - { label: Image, name: image, widget: string }
+          - { label: Alt text, name: alt, widget: string }
+          - { label: Caption, name: caption, widget: string, required: false }
+      - { label: Show table of contents, name: toc, widget: boolean, default: false, i18n: duplicate }
+      - { label: Expand table of contents, name: tocOpen, widget: boolean, default: false, i18n: duplicate }
+      - { label: Body, name: body, widget: markdown, i18n: true }
+
+  - name: pages
+    label: Pages
+    label_singular: Page
+    folder: src/content/pages
+    format: yaml-frontmatter
+    i18n: true
+    fields:
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Date, name: date, widget: datetime, default: '{{now}}', i18n: duplicate }
+      - { label: Draft, name: draft, widget: boolean, default: true, i18n: duplicate }
+      - { label: Language, name: lang, widget: hidden, default: '{{locale}}', i18n: true }
+      - { label: Translation Key, name: translationKey, widget: hidden, default: '{{uuid_short}}', i18n: duplicate }
+      - { label: Description, name: description, widget: text, required: false, i18n: true }
+      - { label: Author, name: author, widget: list, required: false, i18n: duplicate }
+      - { label: Tags, name: tags, widget: list, required: false, i18n: true }
+      - { label: Categories, name: categories, widget: list, required: false, i18n: duplicate }
+      - label: Cover
+        name: cover
+        widget: object
+        required: false
+        i18n: duplicate
+        fields:
+          - { label: Image, name: image, widget: string }
+          - { label: Alt text, name: alt, widget: string }
+          - { label: Caption, name: caption, widget: string, required: false }
+      - { label: Show table of contents, name: toc, widget: boolean, default: false, i18n: duplicate }
+      - { label: Expand table of contents, name: tocOpen, widget: boolean, default: false, i18n: duplicate }
+      - { label: Body, name: body, widget: markdown, i18n: true }
