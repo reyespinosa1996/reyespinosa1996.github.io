@@ -28,7 +28,7 @@
 
 - [x] 5.1 Documentar dentro del change la auditoría de URLs y slugs con cualquier propuesta de cambio y su mapa de redirecciones, sin aplicarla; verificar que `astro.config.mjs` no incorpora redirecciones nuevas y que todas las rutas existentes siguen respondiendo 200 con la misma barra final.
 - [x] 5.2 Verificar en navegador real el `<head>` de un post, un índice y `/search/`, además de `llms.txt`, `llms-full.txt` y `robots.txt`, y confirmar que el sitio público carga sin autenticación mientras `/admin/` sigue ofreciendo solo **Sign In Using Access Token**; guardar captura o registrar el DOM observado.
-- [ ] 5.3 Con aprobación explícita del usuario, hacer commit y push a `master` y verificar en producción que `https://reyespinosa.is-a.dev/llms.txt`, `/es/llms.txt`, `/llms-full.txt`, `/es/llms-full.txt` y `/robots.txt` devuelven 200, sin cambios en Pages, DNS ni dominio.
+- [x] 5.3 Con aprobación explícita del usuario, hacer commit y push a `master` y verificar en producción que `https://reyespinosa.is-a.dev/llms.txt`, `/es/llms.txt`, `/llms-full.txt`, `/es/llms-full.txt` y `/robots.txt` devuelven 200, sin cambios en Pages, DNS ni dominio.
 
 ## Workflow follow-up
 
