@@ -4,6 +4,7 @@ backend:
   name: github
   repo: reyespinosa1996/reyespinosa1996.github.io
   branch: master
+  auth_methods: [token]
 
 site_url: https://reyespinosa.is-a.dev
 

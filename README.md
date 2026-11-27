@@ -39,11 +39,15 @@ Sveltia CMS is a static, Git-first editor. It edits the same Markdown/YAML files
 4. Edit posts and pages normally. Every save writes directly to local files. Review with `git diff`, then commit and push as usual.
 5. Reload the admin after changing `public/admin/config.yml` or after editing content files outside the CMS.
 
-The static admin is also copied to `dist/admin/` and served at `/admin/` in production, but local development uses the `index.html` URL above.
+The static admin is also copied to `dist/admin/` and served at `https://reyespinosa.is-a.dev/admin/` in production, but local development uses the `index.html` URL above.
 
-### Optional remote editing with a token
+### Online editing with a personal access token
 
-If you want to edit through the deployed GitHub backend instead of local files, click **Sign In Using Access Token** in the admin. Use a GitHub personal access token with write access to this repository: a fine-grained token scoped to `reyespinosa1996/reyespinosa1996.github.io` with **Contents: Read and write** (classic tokens need the `repo` scope). Sveltia stores the token in the browser's local storage. Never commit the token to this repository or put it in `public/admin/config.yml`.
+Open `https://reyespinosa.is-a.dev/admin/` in a Chromium-based browser and click **Sign In Using Access Token**. GitHub OAuth is intentionally disabled with `backend.auth_methods: [token]` in `public/admin/config.yml`, so the token is the only remote sign-in method. There is no OAuth app, Cloudflare Worker or backend service: the site stays static and the CMS talks to GitHub from the browser.
+
+Create a fine-grained personal access token scoped to `reyespinosa1996/reyespinosa1996.github.io` with **Contents: Read and write** (Metadata is added automatically). A classic token with the `repo` scope also works. Paste the token into the admin prompt; Sveltia stores it only in that browser's local storage and uses it to read and commit content directly to `master`.
+
+Never put the token in this repository, in `public/admin/config.yml`, or in logs. To revoke access, delete the token under GitHub **Settings → Developer settings → Personal access tokens**; a new token is then required before the browser can save changes again.
 
 ### Editing with OpenCode
 
