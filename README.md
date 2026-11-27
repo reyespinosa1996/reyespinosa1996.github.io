@@ -1,17 +1,32 @@
-# Hi, I'm Reinaldo 👋
+# Reinaldo Espinosa
 
-I'm a **System Administrator** who enjoys making technology work smoothly, securely, and reliably — especially in **healthcare environments**, where downtime really matters.
+I'm a system administrator. I work with Linux, Windows, Python, Docker and FreeBSD/pfSense, mostly in healthcare environments where reliability and uptime matter. I also work in SCRUM teams.
 
-**Tech I work with:** Linux · Windows · Python · Docker · FreeBSD (pfSense) · SCRUM
+## About this site
 
-**Beyond the terminal:**
-- Theologian by training, Christian since 2014
-- Volunteer Spanish translator for the [Ezra Bible App](https://ezrabibleapp.net/)
-- Contributor to the [XFCE4 desktop website](https://xfce.org/) and some of its components
+This site is my personal website and blog. It focuses on technology: notes and articles about system administration, infrastructure and the tools I work with, published in English and Spanish. My background in theology and translation is part of who I am, but it is not the main subject of the site.
 
-I believe good technology, like good theology, should serve people well — clearly, humbly, and without unnecessary complexity.
+## Technologies I use
 
-📫 Open to conversations about systems, Scripture, or translations.
+- Systems and tools: Linux, Windows, Python, Docker, FreeBSD/pfSense, SCRUM.
+- This site: Astro, TypeScript, Astro content collections, `@astrojs/rss`, Fuse.js, rehype-slug, rehype-autolink-headings, Sharp, Umami, Sveltia CMS and GitHub Pages.
+
+## Background
+
+- Theologian by training; Christian since 2014.
+- Volunteer Spanish translator for the [Ezra Bible App](https://ezrabibleapp.net/).
+- Contributor to the [XFCE4 desktop website](https://xfce.org/) and some of its components.
+
+## Contact
+
+For questions about systems, Scripture or translations, contact me at reinaldo.cuentas@gmail.com.
+
+## Licenses
+
+- **Code:** [MIT License](LICENSE). You may use, modify and redistribute the source code, keeping the copyright notice.
+- **Content:** [CC BY 4.0](CONTENT-LICENSE.md) applies to posts and pages. Reuse, including commercial use, is allowed with attribution to Reinaldo Espinosa, a link to the license, and an indication of any changes.
+
+Third-party dependencies keep their own licenses.
 
 ---
 
@@ -52,7 +67,3 @@ Never put the token in this repository, in `public/admin/config.yml`, or in logs
 ### Editing with OpenCode
 
 OpenCode can edit the Markdown/YAML files directly; no CMS session or authentication is needed. Keep one file per language under `src/content/posts/en/<slug>.md` and `src/content/posts/es/<slug>.md` (no `.es.md` suffix), set `lang` to the folder language, reuse the same `translationKey` for the translated pair, and keep `draft: true` until the post is ready. Required frontmatter fields are `title`, `date`, `draft`, `lang`, `translationKey`, `tags`, and `categories`; `description`, `author`, `cover`, `toc`, and `tocOpen` are optional. After editing, run `npm run check` and `npm run build`.
-
-## Rollback
-
-If a deployment breaks the site, revert the deployment commit on `master` and push that revert. The last Hugo state is kept in the local tag `pre-astro-migration` as a reference; the Hugo workflow can be restored from that tag if needed. No GitHub Pages settings or DNS changes are required for a rollback.
