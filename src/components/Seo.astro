@@ -1,105 +1,136 @@
 ---
+import {
+	authorPerson,
+	breadcrumbSchema,
+	itemListSchema,
+	publisherOrganization,
+	type SchemaItem,
+} from '../lib/seo';
+
 interface Props {
-  title?: string;
-  description?: string;
-  /** Ruta canónica relativa, por ejemplo "/posts/mi-post/". */
-  canonical?: string;
-  /** URLs alternativas por idioma (la página actual se incluye automáticamente). */
-  alternates?: { lang: string; url: string }[];
-  image?: string;
-  type?: 'website' | 'blog';
-  lang?: string;
-  /** Fecha de publicación (ISO) para el JSON-LD de las entradas. */
-  publishedDate?: Date;
-  /** Fecha de modificación (ISO) para el JSON-LD de las entradas. */
-  modifiedDate?: Date;
+	title?: string;
+	description?: string;
+	/** Ruta canónica relativa, por ejemplo "/posts/mi-post/". */
+	canonical?: string;
+	/** URLs alternativas por idioma (la página actual se incluye automáticamente). */
+	alternates?: { lang: string; url: string }[];
+	image?: string;
+	imageAlt?: string;
+	imageWidth?: number;
+	imageHeight?: number;
+	type?: 'website' | 'blog';
+	lang?: string;
+	/** Fecha de publicación (ISO) para el JSON-LD de las entradas. */
+	publishedDate?: Date;
+	/** Fecha de modificación (ISO) para el JSON-LD de las entradas. */
+	modifiedDate?: Date;
+	keywords?: string[];
+	breadcrumbs?: SchemaItem[];
+	itemList?: SchemaItem[];
+	noindex?: boolean;
 }
 
 const {
-  title,
-  description,
-  canonical = '/',
-  alternates = [],
-  image,
-  type = 'website',
-  lang = 'en',
-  publishedDate,
-  modifiedDate,
+	title,
+	description,
+	canonical = '/',
+	alternates = [],
+	image,
+	imageAlt,
+	imageWidth,
+	imageHeight,
+	type = 'website',
+	lang = 'en',
+	publishedDate,
+	modifiedDate,
+	keywords = [],
+	breadcrumbs = [],
+	itemList = [],
+	noindex = false,
 } = Astro.props;
 
 const siteName = 'Reinaldo Espinosa · Blog';
 const site = Astro.site ?? new URL('https://reyespinosa.is-a.dev');
-const siteUrl = site.origin;
 
 const canonicalUrl = new URL(canonical, site).href;
 const ogImage = image ? new URL(image, site).href : undefined;
 
 const hreflangLinks = [
-  { lang, url: canonical },
-  ...alternates.filter((a) => a.url !== canonical),
+	{ lang, url: canonical },
+	...alternates.filter((a) => a.url !== canonical),
 ];
 
 const defaultUrl =
-  hreflangLinks.find((l) => l.lang === 'en')?.url ?? hreflangLinks[0]?.url ?? canonical;
+	hreflangLinks.find((l) => l.lang === 'en')?.url ?? hreflangLinks[0]?.url ?? canonical;
+
+const primaryEntity: Record<string, unknown> =
+	type === 'blog'
+		? {
+				'@type': 'BlogPosting',
+				headline: title,
+				description,
+				url: canonicalUrl,
+				image: ogImage,
+				datePublished: publishedDate?.toISOString(),
+				dateModified: (modifiedDate ?? publishedDate)?.toISOString(),
+				author: authorPerson(),
+				publisher: publisherOrganization(site),
+				keywords: keywords.length > 0 ? keywords : undefined,
+				inLanguage: lang,
+			}
+		: {
+				'@type': 'WebSite',
+				name: siteName,
+				description,
+				url: canonicalUrl,
+				author: authorPerson(),
+				publisher: publisherOrganization(site),
+				keywords: keywords.length > 0 ? keywords : undefined,
+				inLanguage: lang,
+			};
+
+const entities: Record<string, unknown>[] = [primaryEntity];
+if (breadcrumbs.length > 0) entities.push(breadcrumbSchema(breadcrumbs, site));
+if (itemList.length > 0) entities.push(itemListSchema(itemList, site));
 
 const jsonLd =
-  type === 'blog'
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: title,
-        description,
-        url: canonicalUrl,
-        image: ogImage,
-        datePublished: publishedDate?.toISOString(),
-        dateModified: (modifiedDate ?? publishedDate)?.toISOString(),
-        author: {
-          '@type': 'Person',
-          name: 'Reinaldo Espinosa',
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: 'Reinaldo Espinosa',
-          url: siteUrl,
-        },
-        inLanguage: lang,
-      }
-    : {
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: siteName,
-        description,
-        url: canonicalUrl,
-        publisher: {
-          '@type': 'Organization',
-          name: 'Reinaldo Espinosa',
-          url: siteUrl,
-        },
-        inLanguage: lang,
-      };
+	entities.length === 1
+		? { '@context': 'https://schema.org', ...primaryEntity }
+		: { '@context': 'https://schema.org', '@graph': entities };
 ---
 
-  <link rel="canonical" href={canonicalUrl} />
+	<link rel="canonical" href={canonicalUrl} />
 
-  {hreflangLinks.map((l) => (
-    <link rel="alternate" hreflang={l.lang} href={new URL(l.url, site).href} />
-  ))}
-  <link rel="alternate" hreflang="x-default" href={new URL(defaultUrl, site).href} />
+	{hreflangLinks.map((l) => (
+		<link rel="alternate" hreflang={l.lang} href={new URL(l.url, site).href} />
+	))}
+	<link rel="alternate" hreflang="x-default" href={new URL(defaultUrl, site).href} />
 
-  {/* Open Graph */}
-  <meta property="og:title" content={title ?? siteName} />
-  <meta property="og:description" content={description} />
-  <meta property="og:type" content={type === 'blog' ? 'article' : 'website'} />
-  <meta property="og:url" content={canonicalUrl} />
-  <meta property="og:site_name" content={siteName} />
-  <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
-  {ogImage && <meta property="og:image" content={ogImage} />}
+	<meta name="robots" content={noindex ? 'noindex' : 'index, follow'} />
 
-  {/* Twitter Cards */}
-  <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
-  <meta name="twitter:title" content={title ?? siteName} />
-  <meta name="twitter:description" content={description} />
-  {ogImage && <meta name="twitter:image" content={ogImage} />}
+	{/* Open Graph */}
+	<meta property="og:title" content={title ?? siteName} />
+	<meta property="og:description" content={description} />
+	<meta property="og:type" content={type === 'blog' ? 'article' : 'website'} />
+	<meta property="og:url" content={canonicalUrl} />
+	<meta property="og:site_name" content={siteName} />
+	<meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+	{ogImage && <meta property="og:image" content={ogImage} />}
+	{ogImage && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+	{ogImage && imageWidth && <meta property="og:image:width" content={String(imageWidth)} />}
+	{ogImage && imageHeight && <meta property="og:image:height" content={String(imageHeight)} />}
+	{type === 'blog' && publishedDate && (
+		<meta property="article:published_time" content={publishedDate.toISOString()} />
+	)}
+	{type === 'blog' && (modifiedDate ?? publishedDate) && (
+		<meta property="article:modified_time" content={(modifiedDate ?? publishedDate)!.toISOString()} />
+	)}
 
-  {/* JSON-LD */}
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+	{/* Twitter Cards */}
+	<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+	<meta name="twitter:title" content={title ?? siteName} />
+	<meta name="twitter:description" content={description} />
+	{ogImage && <meta name="twitter:image" content={ogImage} />}
+
+	{/* JSON-LD */}
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

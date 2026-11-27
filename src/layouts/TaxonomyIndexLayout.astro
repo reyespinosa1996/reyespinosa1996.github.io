@@ -3,7 +3,8 @@ import { getCollection } from 'astro:content';
 import { i18n as enI18n } from '../i18n/en';
 import { i18n as esI18n } from '../i18n/es';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { publishedEntries, taxonomyTerms } from '../lib/content';
+import { langPrefix, otherLang, publishedEntries, taxonomyTerms } from '../lib/content';
+import { defaultDescription, type SchemaItem } from '../lib/seo';
 
 interface Props {
   lang: 'en' | 'es';
@@ -17,15 +18,29 @@ const entries = publishedEntries(await getCollection('posts'), lang);
 const terms = taxonomyTerms(entries, field);
 
 const label = field === 'tags' ? i18n.post.tags : i18n.post.categories;
-const base = lang === 'es' ? '/es' : '';
+const base = langPrefix(lang);
+const canonical = `${base}/${field}/`;
+const translations = [
+  { lang: otherLang(lang), url: `${langPrefix(otherLang(lang))}/${field}/` },
+];
+const breadcrumbs: SchemaItem[] = [
+  { name: i18n.nav.home, url: `${base}/` },
+  { name: label, url: canonical },
+];
+const itemList: SchemaItem[] = terms.map((t) => ({
+  name: t.term,
+  url: `${base}/${field}/${encodeURIComponent(t.slug)}/`,
+}));
 ---
 
 <BaseLayout
   title={label}
-  description={i18n.siteDescription}
+  description={defaultDescription(lang, field === 'tags' ? 'tagsIndex' : 'categoriesIndex')}
   lang={lang}
-  canonical={`${base}/${field}/`}
-  translations={[{ lang: lang === 'es' ? 'en' : 'es', url: `${lang === 'es' ? '' : '/es'}/${field}/` }]}
+  canonical={canonical}
+  translations={translations}
+  breadcrumbs={breadcrumbs}
+  itemList={itemList}
   kind="list"
 >
   <h1 class="section-title">{label}</h1>

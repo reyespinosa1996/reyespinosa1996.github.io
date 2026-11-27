@@ -44,4 +44,29 @@ export const i18n = {
 		results: 'resultados',
 		loadError: 'Error al cargar el índice de búsqueda',
 	},
+	seo: {
+		descriptions: {
+			about:
+				'Conoce a Reinaldo Espinosa, ingeniero DevOps que escribe sobre infraestructura y sitios personales.',
+			postsIndex:
+				'Explora todos los artículos del blog de Reinaldo Espinosa sobre DevOps, código abierto y sitios personales.',
+			tagsIndex:
+				'Explora los temas tratados en los artículos del blog de Reinaldo Espinosa.',
+			categoriesIndex:
+				'Explora las categorías de los artículos del blog de Reinaldo Espinosa.',
+			taxonomyTerm: 'Artículos etiquetados como «{term}» en el blog de Reinaldo Espinosa.',
+			search: 'Busca entre los artículos publicados en el blog de Reinaldo Espinosa.',
+			notFound: 'La página solicitada no existe en el blog de Reinaldo Espinosa.',
+		},
+		llms: {
+			title: 'Reinaldo Espinosa · Blog',
+			summary:
+				'Artículos de Reinaldo Espinosa, ingeniero DevOps que escribe sobre infraestructura confiable, código abierto y sitios personales.',
+			contents: 'Artículos y páginas publicadas',
+			fullText: 'Texto completo',
+			attribution:
+				'Autor: Reinaldo Espinosa. Fuente: https://reyespinosa.is-a.dev/. Contenido bajo CC BY 4.0: https://creativecommons.org/licenses/by/4.0/.',
+			note: 'Cita la fuente e indica cualquier cambio realizado.',
+		},
+	},
 };

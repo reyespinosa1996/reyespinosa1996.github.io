@@ -10,6 +10,8 @@ categories: ['Tools']
 cover:
   image: '/images/hugo-logo-wide.svg'
   alt: 'Hugo Logo'
+  width: 1493
+  height: 391
   caption: ''
 ---
 

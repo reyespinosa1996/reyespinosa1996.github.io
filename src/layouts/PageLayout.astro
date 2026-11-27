@@ -4,6 +4,7 @@ import { i18n as enI18n } from '../i18n/en';
 import { i18n as esI18n } from '../i18n/es';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { langPrefix, otherLang, slugOf } from '../lib/content';
+import { defaultDescription, type SchemaItem } from '../lib/seo';
 
 interface Props {
   entry: CollectionEntry<'pages'>;
@@ -24,14 +25,20 @@ const translated = allPages.find(
 const translations = translated
   ? [{ lang: otherLang(lang), url: `${langPrefix(otherLang(lang))}/${slugOf(translated)}/` }]
   : [];
+
+const breadcrumbs: SchemaItem[] = [
+  { name: i18n.nav.home, url: `${langPrefix(lang)}/` },
+  { name: title, url: canonical },
+];
 ---
 
 <BaseLayout
   title={title}
-  description={description ?? i18n.siteDescription}
+  description={description ?? defaultDescription(lang, 'about')}
   lang={lang}
   canonical={canonical}
   translations={translations}
+  breadcrumbs={breadcrumbs}
   translationKey={translationKey}
   kind="page"
 >

@@ -4,7 +4,8 @@ import { i18n as enI18n } from '../i18n/en';
 import { i18n as esI18n } from '../i18n/es';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostList from '../components/PostList.astro';
-import { publishedEntries, slugifyTerm } from '../lib/content';
+import { langPrefix, postUrl, publishedEntries, slugifyTerm } from '../lib/content';
+import { defaultDescription, type SchemaItem } from '../lib/seo';
 
 interface Props {
   lang: 'en' | 'es';
@@ -24,14 +25,26 @@ const entries: CollectionEntry<'posts'>[] = all.filter((entry) =>
 );
 
 const label = field === 'tags' ? i18n.post.tags : i18n.post.categories;
-const base = lang === 'es' ? '/es' : '';
+const base = langPrefix(lang);
+const canonical = `${base}/${field}/${encodeURIComponent(termSlug)}/`;
+const breadcrumbs: SchemaItem[] = [
+  { name: i18n.nav.home, url: `${base}/` },
+  { name: label, url: `${base}/${field}/` },
+  { name: term, url: canonical },
+];
+const itemList: SchemaItem[] = entries.map((entry) => ({
+  name: entry.data.title,
+  url: postUrl(entry),
+}));
 ---
 
 <BaseLayout
   title={`${term} · ${label}`}
-  description={i18n.siteDescription}
+  description={defaultDescription(lang, 'taxonomyTerm', term)}
   lang={lang}
-  canonical={`${base}/${field}/${encodeURIComponent(termSlug)}/`}
+  canonical={canonical}
+  breadcrumbs={breadcrumbs}
+  itemList={itemList}
   kind="list"
 >
   <h1 class="section-title">{term}</h1>

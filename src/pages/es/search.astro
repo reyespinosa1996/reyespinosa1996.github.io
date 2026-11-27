@@ -2,15 +2,17 @@
 import { i18n } from '../../i18n/es';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SearchBox from '../../components/SearchBox.astro';
+import { defaultDescription } from '../../lib/seo';
 ---
 
   <BaseLayout
     title={i18n.search.label}
-    description={i18n.siteDescription}
+    description={defaultDescription('es', 'search')}
     lang="es"
     canonical="/es/search/"
     translations={[{ lang: 'en', url: '/search/' }]}
     kind="list"
+    noindex
   >
     <h1 class="section-title">{i18n.search.label}</h1>
 

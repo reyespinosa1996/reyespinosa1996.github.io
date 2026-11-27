@@ -17,6 +17,8 @@ const schema = z.object({
 			image: z.string(),
 			alt: z.string(),
 			caption: z.string().optional(),
+			width: z.number().optional(),
+			height: z.number().optional(),
 		})
 		.optional(),
 	toc: z.boolean().default(false),

@@ -1,5 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
-import { langPrefix, postUrl, slugOf, taxonomyTerms, type Lang } from './content';
+import { langPrefix, pageUrl, postUrl, taxonomyTerms, type Lang } from './content';
 
 export interface SitemapAlternate {
   lang: string;
@@ -12,16 +12,14 @@ export interface SitemapEntry {
   alternates: SitemapAlternate[];
 }
 
-/** Rutas estáticas publicables por idioma. */
+/** Rutas estáticas indexables por idioma (sin utilidades ni zonas privadas). */
 const STATIC_ROUTES: Record<Lang, string[]> = {
-  en: ['/', '/posts/', '/tags/', '/categories/', '/search/'],
-  es: ['/es/', '/es/posts/', '/es/tags/', '/es/categories/', '/es/search/'],
+  en: ['/', '/posts/', '/tags/', '/categories/'],
+  es: ['/es/', '/es/posts/', '/es/tags/', '/es/categories/'],
 };
 
-/** URL de una entrada de la colección `pages`. */
-function pageUrl(entry: CollectionEntry<'pages'>): string {
-  return `${langPrefix(entry.data.lang)}/${slugOf(entry)}/`;
-}
+/** Rutas que declaran `noindex` y no deben publicarse en el sitemap. */
+const NOINDEX_ROUTES = new Set(['/search/', '/es/search/', '/404.html', '/es/404.html']);
 
 /** Ruta equivalente del idioma contrario para una ruta estática. */
 function counterpart(url: string, lang: Lang): string {
@@ -143,7 +141,9 @@ export async function sitemapEntries(
     }
   }
 
-  return entries;
+  return entries.filter(
+    (entry) => !NOINDEX_ROUTES.has(entry.url) && !entry.url.startsWith('/admin/'),
+  );
 }
 
 /**

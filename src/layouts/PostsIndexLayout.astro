@@ -5,8 +5,9 @@ import { i18n as esI18n } from '../i18n/es';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostList from '../components/PostList.astro';
 import Pagination from '../components/Pagination.astro';
-import { publishedEntries } from '../lib/content';
+import { otherLang, postUrl, publishedEntries } from '../lib/content';
 import { paginate, postsPageUrl } from '../lib/pagination';
+import { defaultDescription, type SchemaItem } from '../lib/seo';
 
 interface Props {
   lang: 'en' | 'es';
@@ -23,15 +24,25 @@ const totalPages = pages.length;
 const entries: CollectionEntry<'posts'>[] = pages[page - 1] ?? [];
 
 const canonical = postsPageUrl(lang, 1);
-const translations = [{ lang: lang === 'es' ? 'en' : 'es', url: canonical }];
+const translations = [{ lang: otherLang(lang), url: postsPageUrl(otherLang(lang), 1) }];
+const breadcrumbs: SchemaItem[] = [
+  { name: i18n.nav.home, url: `${lang === 'es' ? '/es' : ''}/` },
+  { name: i18n.nav.posts, url: canonical },
+];
+const itemList: SchemaItem[] = all.map((entry) => ({
+  name: entry.data.title,
+  url: postUrl(entry),
+}));
 ---
 
 <BaseLayout
   title={i18n.nav.posts}
-  description={i18n.siteDescription}
+  description={defaultDescription(lang, 'postsIndex')}
   lang={lang}
   canonical={canonical}
   translations={translations}
+  breadcrumbs={breadcrumbs}
+  itemList={itemList}
   translationKey="blog-list"
   kind="list"
 >

@@ -43,4 +43,30 @@ export const i18n = {
 		results: 'results',
 		loadError: 'Error loading the search index',
 	},
+	seo: {
+		descriptions: {
+			about:
+				'Learn about Reinaldo Espinosa, a DevOps engineer writing about infrastructure and personal websites.',
+			postsIndex:
+				'Browse every post on Reinaldo Espinosa’s blog about DevOps, open source and personal websites.',
+			tagsIndex:
+				'Explore the topics covered by the posts on Reinaldo Espinosa’s blog.',
+			categoriesIndex:
+				'Browse the categories of the posts on Reinaldo Espinosa’s blog.',
+			taxonomyTerm: 'Posts filed under “{term}” on Reinaldo Espinosa’s blog.',
+			search: 'Search the posts published on Reinaldo Espinosa’s blog.',
+			notFound:
+				'The page you requested could not be found on Reinaldo Espinosa’s blog.',
+		},
+		llms: {
+			title: 'Reinaldo Espinosa · Blog',
+			summary:
+				'Articles by Reinaldo Espinosa, a DevOps engineer writing about reliable infrastructure, open source and personal websites.',
+			contents: 'Published posts and pages',
+			fullText: 'Full text',
+			attribution:
+				'Author: Reinaldo Espinosa. Source: https://reyespinosa.is-a.dev/. Content licensed under CC BY 4.0: https://creativecommons.org/licenses/by/4.0/.',
+			note: 'Provide attribution with the source URL and indicate any changes.',
+		},
+	},
 };

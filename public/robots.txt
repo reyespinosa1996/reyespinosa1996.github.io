@@ -1,1 +1,37 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /index.json
+Disallow: /es/index.json
+
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /index.json
+Disallow: /es/index.json
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /index.json
+Disallow: /es/index.json
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /index.json
+Disallow: /es/index.json
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /index.json
+Disallow: /es/index.json
+
+User-agent: CCBot
+Allow: /
+Disallow: /admin/
+Disallow: /index.json
+Disallow: /es/index.json
+
 Sitemap: https://reyespinosa.is-a.dev/sitemap.xml

@@ -6,6 +6,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import { readingTime } from '../lib/reading-time';
 import { langPrefix, otherLang, postUrl, slugifyTerm } from '../lib/content';
+import { keywordsFrom, type SchemaItem } from '../lib/seo';
+import { postsPageUrl } from '../lib/pagination';
 
 interface Props {
   entry: CollectionEntry<'posts'>;
@@ -27,6 +29,12 @@ const translated = allPosts.find(
 const translations = translated ? [{ lang: otherLang(lang), url: postUrl(translated) }] : [];
 
 const image = cover?.image;
+const keywords = keywordsFrom(tags, categories);
+const breadcrumbs: SchemaItem[] = [
+  { name: i18n.nav.home, url: `${langPrefix(lang)}/` },
+  { name: i18n.nav.posts, url: postsPageUrl(lang, 1) },
+  { name: title, url: canonical },
+];
 ---
 
 <BaseLayout
@@ -36,11 +44,17 @@ const image = cover?.image;
   canonical={canonical}
   translations={translations}
   image={image}
+  imageAlt={cover?.alt}
+  imageWidth={cover?.width}
+  imageHeight={cover?.height}
+  keywords={keywords}
+  breadcrumbs={breadcrumbs}
   type="blog"
   publishedDate={date}
   modifiedDate={date}
   translationKey={data.translationKey}
   kind="post"
+  noindex={data.draft}
 >
   <article>
     <header class="post-header">

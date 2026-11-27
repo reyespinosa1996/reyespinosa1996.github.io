@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Seo from '../components/Seo.astro';
 import type { Lang } from '../lib/content';
+import type { SchemaItem } from '../lib/seo';
 
 const siteTitle = enI18n.siteTitle;
 
@@ -15,11 +16,18 @@ interface Props {
   canonical?: string;
   translations?: { lang: string; url: string }[];
   image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   type?: 'website' | 'blog';
   translationKey?: string;
   kind?: 'home' | 'post' | 'page' | 'list';
   publishedDate?: Date;
   modifiedDate?: Date;
+  keywords?: string[];
+  breadcrumbs?: SchemaItem[];
+  itemList?: SchemaItem[];
+  noindex?: boolean;
 }
 
 const {
@@ -29,11 +37,18 @@ const {
   canonical,
   translations,
   image,
+  imageAlt,
+  imageWidth,
+  imageHeight,
   type = 'website',
   translationKey,
   kind = 'home',
   publishedDate,
   modifiedDate,
+  keywords,
+  breadcrumbs,
+  itemList,
+  noindex,
 } = Astro.props;
 
 const canonicalPath = canonical ?? '/';
@@ -55,10 +70,17 @@ const canonicalPath = canonical ?? '/';
       canonical={canonicalPath}
       alternates={translations}
       image={image}
+      imageAlt={imageAlt}
+      imageWidth={imageWidth}
+      imageHeight={imageHeight}
       type={type}
       lang={lang}
       publishedDate={publishedDate}
       modifiedDate={modifiedDate}
+      keywords={keywords}
+      breadcrumbs={breadcrumbs}
+      itemList={itemList}
+      noindex={noindex}
     />
 
     <!-- Umami analytics (single instance) -->

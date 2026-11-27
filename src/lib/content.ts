@@ -28,6 +28,13 @@ export function postUrl(entry: CollectionEntry<'posts'>): string {
 }
 
 /**
+ * URL pública de una entrada de la colección `pages`.
+ */
+export function pageUrl(entry: CollectionEntry<'pages'>): string {
+  return `${langPrefix(entry.data.lang)}/${slugOf(entry)}/`;
+}
+
+/**
  * Entradas publicadas (sin drafts) de una colección, ordenadas por fecha descendente.
  *
  * Se declaran sobrecargas explícitas porque `CollectionEntry<C>` no es invertible:
