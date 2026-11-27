@@ -75,26 +75,26 @@
 - [x] 8.1 Reemplazar `.github/workflows/hugo.yml` por `.github/workflows/deploy.yml` con `actions/checkout@v7`, `withastro/action@v6` (`node-version: 24`) y `actions/deploy-pages@v5`, disparado por push a `master` y `workflow_dispatch`. Verificación: el YAML es válido, usa `contents: read`, `pages: write`, `id-token: write` y no modifica la configuración de Pages.
 - [x] 8.2 Añadir un paso de CI que verifique `dist/CNAME` y su contenido exacto. Verificación: el paso falla si el archivo no existe o si el contenido no es `reyespinosa.is-a.dev`, y pasa en local con `npm run build`.
 - [x] 8.3 Capturar una línea base de la configuración de Pages con `gh api repos/reyespinosa1996/reyespinosa1996.github.io/pages` (solo lectura) y guardarla en `/tmp/astro-migration/pages-before.json`. Verificación: el archivo contiene fuente, custom domain y estado de HTTPS.
-- [ ] 8.4 Hacer merge a `master` y verificar que el workflow de GitHub Actions completa build y deploy sin errores. Verificación: el run termina en verde y el job de deploy publica el artefacto en el entorno `github-pages`.
-- [ ] 8.5 Verificar producción con `curl -I` y `curl -s` sobre `/`, `/about/`, `/posts/`, `/posts/hugo-for-personal-website/`, `/es/`, `/es/about/`, `/es/posts/`, `/index.xml`, `/sitemap.xml`, `/search/` y `/404.html`. Verificación: respuestas 200 (o 404 para la página de error), contenido correcto y sin `localhost` en el HTML.
-- [ ] 8.6 Verificar que `https://reyespinosa.is-a.dev/` sirve el sitio con HTTPS válido y sin redirección a `github.io`. Verificación: `curl -I` muestra 200, el certificado es válido y el `location` no apunta a `github.io`.
-- [ ] 8.7 Comparar la configuración de Pages actual con `/tmp/astro-migration/pages-before.json`. Verificación: fuente GitHub Actions, custom domain `reyespinosa.is-a.dev` y Enforce HTTPS sin cambios.
+- [x] 8.4 Hacer merge a `master` y verificar que el workflow de GitHub Actions completa build y deploy sin errores. Verificación: el run termina en verde y el job de deploy publica el artefacto en el entorno `github-pages`.
+- [x] 8.5 Verificar producción con `curl -I` y `curl -s` sobre `/`, `/about/`, `/posts/`, `/posts/hugo-for-personal-website/`, `/es/`, `/es/about/`, `/es/posts/`, `/index.xml`, `/sitemap.xml`, `/search/` y `/404.html`. Verificación: respuestas 200 (o 404 para la página de error), contenido correcto y sin `localhost` en el HTML.
+- [x] 8.6 Verificar que `https://reyespinosa.is-a.dev/` sirve el sitio con HTTPS válido y sin redirección a `github.io`. Verificación: `curl -I` muestra 200, el certificado es válido y el `location` no apunta a `github.io`.
+- [x] 8.7 Comparar la configuración de Pages actual con `/tmp/astro-migration/pages-before.json`. Verificación: fuente GitHub Actions, custom domain `reyespinosa.is-a.dev` y Enforce HTTPS sin cambios.
 - [x] 8.8 Documentar el procedimiento de rollback (revert del commit o redeploy del tag `pre-astro-migration`) en `README.md` o `AGENTS.md`. Verificación: el procedimiento es reproducible y no requiere cambiar Pages ni DNS.
 
 ## 9. Limpieza de Hugo
 
-- [ ] 9.1 Eliminar `hugo.yaml`, `hugo.yaml.example`, `.hugo_build.lock`, `archetypes/`, `layouts/` e `i18n/`. Verificación: `grep -rn 'hugo\|PaperMod' --exclude-dir=.git --exclude-dir=openspec .` no encuentra referencias activas fuera de documentación histórica.
-- [ ] 9.2 Eliminar los submódulos `themes/PaperMod` y `docs/` (sujeto a la decisión 0.1) y actualizar `.gitmodules`. Verificación: `git submodule status` queda vacío, `.gitmodules` no referencia esos paths y `themes/`/`docs/` ya no existen.
-- [ ] 9.3 Actualizar `README.md` con una sección de desarrollo Astro (`npm install`, `npm run dev`, `npm run check`, `npm run build`, `npm run preview`) sin borrar la presentación personal. Verificación: los comandos documentados se ejecutan tal como están escritos.
-- [ ] 9.4 Actualizar `AGENTS.md` y `openspec/project.md` para reflejar el estado final Astro y eliminar instrucciones exclusivas de la migración. Verificación: no quedan comandos de Hugo ni referencias a PaperMod como stack activo.
-- [ ] 9.5 Ejecutar la verificación final local: `npm run check`, `npm run build`, `npm run preview` y link checker interno sobre `dist/`. Verificación: no hay errores de tipos, el build termina y no hay 404 internos.
-- [ ] 9.6 Verificar que el repositorio sigue siendo el mismo y está limpio. Verificación: `git remote -v` muestra `reyespinosa1996/reyespinosa1996.github.io`, no se ejecutó `git init` y `git status` solo muestra cambios intencionales.
+- [x] 9.1 Eliminar `hugo.yaml`, `hugo.yaml.example`, `.hugo_build.lock`, `archetypes/`, `layouts/` e `i18n/`. Verificación: `grep -rn 'hugo\|PaperMod' --exclude-dir=.git --exclude-dir=openspec .` no encuentra referencias activas fuera de documentación histórica.
+- [x] 9.2 Eliminar los submódulos `themes/PaperMod` y `docs/` (sujeto a la decisión 0.1) y actualizar `.gitmodules`. Verificación: `git submodule status` queda vacío, `.gitmodules` no referencia esos paths y `themes/`/`docs/` ya no existen.
+- [x] 9.3 Actualizar `README.md` con una sección de desarrollo Astro (`npm install`, `npm run dev`, `npm run check`, `npm run build`, `npm run preview`) sin borrar la presentación personal. Verificación: los comandos documentados se ejecutan tal como están escritos.
+- [x] 9.4 Actualizar `AGENTS.md` y `openspec/project.md` para reflejar el estado final Astro y eliminar instrucciones exclusivas de la migración. Verificación: no quedan comandos de Hugo ni referencias a PaperMod como stack activo.
+- [x] 9.5 Ejecutar la verificación final local: `npm run check`, `npm run build`, `npm run preview` y link checker interno sobre `dist/`. Verificación: no hay errores de tipos, el build termina y no hay 404 internos.
+- [x] 9.6 Verificar que el repositorio sigue siendo el mismo y está limpio. Verificación: `git remote -v` muestra `reyespinosa1996/reyespinosa1996.github.io`, no se ejecutó `git init` y `git status` solo muestra cambios intencionales.
 
 ## 10. Integración final
 
 - [x] 10.1 Comparar el inventario de `/tmp/astro-migration/url-inventory.txt` con las URLs generadas en `dist/` y confirmar que todas las URLs canónicas actuales existen. Verificación: no hay URLs canónicas faltantes; las legacy tienen redirección.
 - [x] 10.2 Verificar la paridad de contenido completa: 4 posts (2 en, 2 es), 2 About, listados, taxonomías, feeds, sitemap, búsqueda, 404 y Umami. Verificación: checklist de aceptación de `content-and-routing/spec.md` y `site-hosting/spec.md` sin puntos fallidos.
-- [ ] 10.3 Ejecutar un smoke test en producción de búsqueda, selector de idioma, toggle de tema, TOC, enlaces sociales y feeds. Verificación: todas las interacciones funcionan en `https://reyespinosa.is-a.dev/` y no hay errores en la consola del navegador.
+- [x] 10.3 Ejecutar un smoke test en producción de búsqueda, selector de idioma, toggle de tema, TOC, enlaces sociales y feeds. Verificación: todas las interacciones funcionan en `https://reyespinosa.is-a.dev/` y no hay errores en la consola del navegador.
 
 ## Workflow follow-up
 
